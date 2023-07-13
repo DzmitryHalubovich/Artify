@@ -5,6 +5,12 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.API", "src\Artify.API\Artify.API.csproj", "{3E791194-4501-4A7E-B2B5-729D7CCEB384}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.DAL", "src\Artify.DAL\Artify.DAL.csproj", "{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.WEB", "src\Artify.WEB\Artify.WEB.csproj", "{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.BusinessLogic", "src\Artify.BusinessLogic\Artify.BusinessLogic.csproj", "{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,23 @@ Global
 		{3E791194-4501-4A7E-B2B5-729D7CCEB384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E791194-4501-4A7E-B2B5-729D7CCEB384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E791194-4501-4A7E-B2B5-729D7CCEB384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FAEC480-0E64-4A61-9E19-086024D8BC8C}
 	EndGlobalSection
 EndGlobal
