@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Artify.Contracts\Artify.Contracts.csproj" />
-    <ProjectReference Include="..\Artify.DAL\Artify.DAL.csproj" />
-  </ItemGroup>
-
 </Project>

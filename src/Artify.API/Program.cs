@@ -1,7 +1,16 @@
+using Artify.API.Extensions;
 using Artify.DAL;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureCors();
+builder.Services.ConfigureIISIntegration();
+builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureSqlContext(builder.Configuration);
+
 
 // Add services to the container.
 
@@ -22,6 +31,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

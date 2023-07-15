@@ -7,7 +7,7 @@ namespace Artify.DAL
     {
         public RepositoryContext(DbContextOptions options) : base(options) { }
 
-        DbSet<Artwork>? Artworks { get; set; }
-        DbSet<Author>? Authors { get; set; }
+        public DbSet<Artwork> Artworks { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }
