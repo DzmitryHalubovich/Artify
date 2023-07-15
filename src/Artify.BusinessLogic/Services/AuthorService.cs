@@ -1,5 +1,6 @@
 ﻿using Artify.Contracts.Repositories;
 using Artify.Contracts.Services;
+using Artify.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,18 @@ namespace Artify.BusinessLogic.Services
             _repository = repository;
         }
 
+        public IEnumerable<Author> GetAll(bool trackChanges)
+        {
+            try
+            {
+                var authors = _repository.Author.GetAllAuthors(trackChanges);
 
+                return authors;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Artify.Contracts.Services;
+﻿using Artify.Contracts.Repositories;
+using Artify.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,14 @@ namespace Artify.BusinessLogic.Services
         private readonly Lazy<IArtworkService> _artworkService;
         private readonly Lazy<IAuthorService> _authorService;
 
-        public IArtworkService ArtworkService => throw new NotImplementedException();
 
-        public IAuthorService AuthorService => throw new NotImplementedException();
+        public ServiceManager(IRepositoryManager repositoryManager)
+        {
+            _artworkService = new Lazy<IArtworkService>(() => new ArtworkService(repositoryManager));
+            _authorService = new Lazy<IAuthorService>(() => new AuthorService(repositoryManager));
+        }
+        public IArtworkService ArtworkService => _artworkService.Value;
+
+        public IAuthorService AuthorService => _authorService.Value;
     }
 }

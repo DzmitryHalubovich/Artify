@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Artify.DAL.Entities;
 
 namespace Artify.Contracts.Services
 {
     public interface IAuthorService
     {
+        IEnumerable<Author> GetAll(bool trackChanges);
     }
 }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.BusinessLogic", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Contracts", "src\Artify.Contracts\Artify.Contracts.csproj", "{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Presentation", "src\Artify.Presentation\Artify.Presentation.csproj", "{3608604F-3A68-447D-94B4-26EC4FBC3C32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
