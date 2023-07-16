@@ -1,48 +1,88 @@
 using Artify.API.Extensions;
-using Artify.DAL;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration() //#1
+    .WriteTo.Console().CreateLogger(); //#1
 
-builder.Services.ConfigureCors();
-builder.Services.ConfigureIISIntegration();
-builder.Services.ConfigureRepositoryManager();
-builder.Services.ConfigureServiceManager();
-builder.Services.ConfigureSqlContext(builder.Configuration);
+Log.Information("Starting up");//#1
 
-
-// Add services to the container.
-
-builder.Services.AddControllers()
-    .AddApplicationPart(typeof(Artify.Presentation.AssemblyReference).Assembly);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var builder = WebApplication.CreateBuilder(args);
+
+    //Serilog #1
+    builder.Host.UseSerilog((ctx, lc) => lc
+           .WriteTo.Console()
+           .WriteTo.Seq("http://localhost:5341")
+           .ReadFrom.Configuration(ctx.Configuration));
+
+    builder.Services.ConfigureCors();
+    builder.Services.ConfigureIISIntegration();
+    builder.Services.ConfigureRepositoryManager();
+    builder.Services.ConfigureServiceManager();
+    builder.Services.ConfigureSqlContext(builder.Configuration);
+    builder.Services.AddAutoMapper(typeof(Program));
+    // Add services to the container.
+
+    builder.Services.AddControllers()
+        .AddApplicationPart(typeof(Artify.Presentation.AssemblyReference).Assembly);
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+
+
+    var app = builder.Build();
+
+    app.UseSerilogRequestLogging(configure =>
+    {
+        configure.MessageTemplate = "HTTPS {RequestMethod} {RequestPath} ({UserId}) responded {StatusCode} in {Elapsed:0.0000}ms";
+    });
+
+    var logger = app.Services.GetRequiredService<Serilog.ILogger>();
+    app.ConfigureExceptionHandler(logger);
+
+    if (app.Environment.IsProduction())
+    {
+        app.UseHsts();
+    }
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseStaticFiles();
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.All
+    });
+
+    app.UseCors("CorsPolicy");
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    app.Run();
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseStaticFiles();
-app.UseForwardedHeaders(new ForwardedHeadersOptions
+catch (Exception ex)
 {
-    ForwardedHeaders = ForwardedHeaders.All
-});
-
-app.UseCors("CorsPolicy");
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+    string type = ex.GetType().Name;
+    if (type.Equals("HostAbortedException", StringComparison.Ordinal))
+    {
+        throw;
+    }
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}

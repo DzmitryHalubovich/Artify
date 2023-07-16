@@ -1,6 +1,6 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.DAL;
+﻿using Artify.DAL;
 using Artify.Entities.Models;
+using Artify.Repositories.Contracts;
 
 namespace Artify.Repository.Repositories
 {

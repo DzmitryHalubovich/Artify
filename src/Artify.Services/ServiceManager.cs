@@ -1,5 +1,6 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.Contracts.Services;
+﻿using Artify.Repositories.Contracts;
+using Artify.Services.Contracts;
+using AutoMapper;
 
 namespace Artify.Services
 {
@@ -8,11 +9,12 @@ namespace Artify.Services
         private readonly Lazy<IArtworkService> _artworkService;
         private readonly Lazy<IAuthorService> _authorService;
 
-
-        public ServiceManager(IRepositoryManager repositoryManager)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
-            _artworkService = new Lazy<IArtworkService>(() => new ArtworkService(repositoryManager));
-            _authorService = new Lazy<IAuthorService>(() => new AuthorService(repositoryManager));
+            _artworkService = new Lazy<IArtworkService>(() => 
+                    new ArtworkService(repositoryManager, mapper));
+            _authorService = new Lazy<IAuthorService>(() => 
+                    new AuthorService(repositoryManager, mapper));
         }
         public IArtworkService ArtworkService => _artworkService.Value;
 

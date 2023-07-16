@@ -1,29 +1,30 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.Contracts.Services;
-using Artify.Entities.Models;
+﻿using Artify.Entities.DTO;
+using Artify.Repositories.Contracts;
+using Artify.Services.Contracts;
+using AutoMapper;
 
 namespace Artify.Services
 {
     public sealed class AuthorService : IAuthorService
     {
         private readonly IRepositoryManager _repository;
-        public AuthorService(IRepositoryManager repository)
+        private readonly IMapper _mapper;
+        public AuthorService(IRepositoryManager repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public IEnumerable<Author> GetAll(bool trackChanges)
+        public IEnumerable<AuthorDto> GetAll(bool trackChanges)
         {
-            try
-            {
-                var authors = _repository.Author.GetAllAuthors(trackChanges);
+           
+            var authors = _repository.Author.GetAllAuthors(trackChanges);
 
-                return authors;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var authorsDto = _mapper.Map<IEnumerable<AuthorDto>>(authors);
+
+            return authorsDto;
+            
         }
+
     }
 }

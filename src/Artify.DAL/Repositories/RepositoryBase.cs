@@ -1,5 +1,5 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.DAL;
+﻿using Artify.DAL;
+using Artify.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

@@ -1,4 +1,4 @@
-﻿using Artify.Contracts.Services;
+﻿using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artify.Presentation.Controllers
@@ -14,16 +14,12 @@ namespace Artify.Presentation.Controllers
         [HttpGet]
         public IActionResult GetAuthors()
         {
-            try
-            {
-                var authors = _service.AuthorService.GetAll(trackChanges:false);
 
-                return Ok(authors);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal server error");
-            }
+            throw new Exception("Exception");
+            var authors = _service.AuthorService.GetAll(trackChanges:false);
+
+            return Ok(authors);
+
         }
     }
 }

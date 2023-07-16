@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Artify.Contracts.Repositories
+namespace Artify.Repositories.Contracts
 {
     public interface IRepositoryBase<T>
     {
