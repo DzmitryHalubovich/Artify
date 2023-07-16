@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Artify.Entities\Artify.Entities.csproj" />
-  </ItemGroup>
-
 </Project>

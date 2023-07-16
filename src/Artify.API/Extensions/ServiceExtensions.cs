@@ -1,8 +1,8 @@
-﻿using Artify.BusinessLogic.Repositories;
-using Artify.BusinessLogic.Services;
+﻿using Artify.Services;
 using Artify.Contracts.Repositories;
 using Artify.Contracts.Services;
-using Artify.DAL;
+using Artify.Repository;
+using Artify.Repository.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Artify.API.Extensions

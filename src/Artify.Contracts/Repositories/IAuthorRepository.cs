@@ -1,4 +1,4 @@
-﻿using Artify.DAL.Entities;
+﻿using Artify.Entities.Models;
 
 namespace Artify.Contracts.Repositories
 {

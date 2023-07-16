@@ -1,8 +1,7 @@
 ﻿using Artify.Contracts.Repositories;
-using Artify.DAL;
-using Artify.DAL.Entities;
+using Artify.Entities.Models;
 
-namespace Artify.BusinessLogic.Repositories
+namespace Artify.Repository.Repositories
 {
     public class AuthorRepository : RepositoryBase<Author>, IAuthorRepository
     {

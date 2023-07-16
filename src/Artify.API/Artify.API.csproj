@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Artify.BusinessLogic\Artify.BusinessLogic.csproj" />
-    <ProjectReference Include="..\Artify.DAL\Artify.DAL.csproj" />
+    <ProjectReference Include="..\Artify.DAL\Artify.Repository.csproj" />
     <ProjectReference Include="..\Artify.Presentation\Artify.Presentation.csproj" />
   </ItemGroup>
 

@@ -1,12 +1,7 @@
 ﻿using Artify.Contracts.Repositories;
 using Artify.Contracts.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Artify.BusinessLogic.Services
+namespace Artify.Services
 {
     public class ServiceManager : IServiceManager
     {

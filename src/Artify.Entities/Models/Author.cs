@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Artify.DAL.Entities
+namespace Artify.Entities.Models
 {
     public class Author
     {

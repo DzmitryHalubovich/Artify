@@ -1,13 +1,8 @@
 ﻿using Artify.Contracts.Repositories;
 using Artify.Contracts.Services;
-using Artify.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Artify.Entities.Models;
 
-namespace Artify.BusinessLogic.Services
+namespace Artify.Services
 {
     public sealed class AuthorService : IAuthorService
     {

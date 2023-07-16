@@ -3,7 +3,7 @@ using Artify.DAL;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Artify.BusinessLogic.Repositories
+namespace Artify.Repository.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

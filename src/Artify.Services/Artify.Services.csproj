@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Artify.Entities\Artify.Entities.csproj" />
+    <ProjectReference Include="..\Artify.DAL\Artify.Repository.csproj" />
   </ItemGroup>
 
 </Project>

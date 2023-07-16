@@ -1,4 +1,4 @@
-﻿using Artify.DAL;
+﻿using Artify.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
