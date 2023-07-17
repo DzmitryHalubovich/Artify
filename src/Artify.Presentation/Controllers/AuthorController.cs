@@ -14,12 +14,17 @@ namespace Artify.Presentation.Controllers
         [HttpGet]
         public IActionResult GetAuthors()
         {
-
-            throw new Exception("Exception");
             var authors = _service.AuthorService.GetAll(trackChanges:false);
 
             return Ok(authors);
+        }
 
+        [HttpGet("{authorId}/artworks")]
+        public IActionResult GetArtworksForAuthor(Guid authorId)
+        {
+            var artworks = _service.ArtworkService.GetAllForAuthor(authorId, false);
+
+            return Ok(artworks);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Artify.Entities.DTO;
+using Artify.Entities.Exceptions;
 using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
@@ -17,14 +18,11 @@ namespace Artify.Services
 
         public IEnumerable<AuthorDto> GetAll(bool trackChanges)
         {
-           
             var authors = _repository.Author.GetAllAuthors(trackChanges);
 
             var authorsDto = _mapper.Map<IEnumerable<AuthorDto>>(authors);
 
             return authorsDto;
-            
         }
-
     }
 }

@@ -7,9 +7,17 @@ namespace Artify.Repository.Repositories
     {
         public AuthorRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
+        public Author Get(Guid authorId, bool trackChanges) =>
+            FindByCondition(a => a.Id.Equals(authorId), trackChanges)
+                .SingleOrDefault();
+            
+
+
         public IEnumerable<Author> GetAllAuthors(bool trackChanges) =>
             FindAll(trackChanges)
                 .OrderBy(c=>c.Name)
                 .ToList();
+
+
     }
 }

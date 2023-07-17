@@ -5,6 +5,6 @@ namespace Artify.Services.Contracts
 {
     public interface IAuthorService
     {
-        IEnumerable<AuthorDto> GetAll(bool trackChanges);
+        public IEnumerable<AuthorDto> GetAll(bool trackChanges);
     }
 }
