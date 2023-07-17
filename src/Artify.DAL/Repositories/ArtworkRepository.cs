@@ -8,5 +8,18 @@ namespace Artify.Repository.Repositories
     {
         public ArtworkRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
+        public IEnumerable<Artwork> GetAll(bool trackChanges) =>
+            FindAll(trackChanges)
+                .OrderBy(x => x.Id)
+                .ToList();
+
+        public Artwork Get(Guid artworkId, bool trackChanges) =>
+            FindByCondition(a => a.Id.Equals(artworkId), trackChanges)
+                .SingleOrDefault();
+
+        public IEnumerable<Artwork> GetAllForAuthor(Guid authorId, bool trackChanges) =>
+            FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
+                .OrderBy(x => x.Id)
+                .ToList();
     }
 }
