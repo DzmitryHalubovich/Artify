@@ -5,13 +5,19 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.API", "src\Artify.API\Artify.API.csproj", "{3E791194-4501-4A7E-B2B5-729D7CCEB384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.DAL", "src\Artify.DAL\Artify.DAL.csproj", "{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories", "src\Artify.DAL\Artify.Repositories.csproj", "{29ECDCB7-8538-49CF-8F5A-E2E3BB6AB236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.WEB", "src\Artify.WEB\Artify.WEB.csproj", "{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.WEB", "src\Artify.WEB\Artify.WEB.csproj", "{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.BusinessLogic", "src\Artify.BusinessLogic\Artify.BusinessLogic.csproj", "{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories.Contracts", "src\Artify.Contracts\Artify.Repositories.Contracts.csproj", "{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Contracts", "src\Artify.Contracts\Artify.Contracts.csproj", "{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Presentation", "src\Artify.Presentation\Artify.Presentation.csproj", "{3608604F-3A68-447D-94B4-26EC4FBC3C32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Entities", "src\Artify.Entities\Artify.Entities.csproj", "{A4697ADB-817F-43EF-9F5E-BE9088D91836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Services", "src\Artify.Services\Artify.Services.csproj", "{3C85AE59-EA79-4548-BFE2-C0B8F492A937}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Services.Contracts", "src\Artify.Services.Contracts\Artify.Services.Contracts.csproj", "{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +37,26 @@ Global
 		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8216D7E3-6DA1-4CBF-BB03-B0A16EA0F946}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D87A5D98-2BA3-4EBE-ADC7-C65CE3DF3ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{495FC720-3F3D-4AFF-A01C-25BAA9C77FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3608604F-3A68-447D-94B4-26EC4FBC3C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4697ADB-817F-43EF-9F5E-BE9088D91836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4697ADB-817F-43EF-9F5E-BE9088D91836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4697ADB-817F-43EF-9F5E-BE9088D91836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4697ADB-817F-43EF-9F5E-BE9088D91836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C85AE59-EA79-4548-BFE2-C0B8F492A937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C85AE59-EA79-4548-BFE2-C0B8F492A937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C85AE59-EA79-4548-BFE2-C0B8F492A937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C85AE59-EA79-4548-BFE2-C0B8F492A937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

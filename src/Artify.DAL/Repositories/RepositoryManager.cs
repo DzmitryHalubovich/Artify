@@ -1,7 +1,7 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.DAL;
+﻿using Artify.DAL;
+using Artify.Repositories.Contracts;
 
-namespace Artify.BusinessLogic.Repositories
+namespace Artify.Repository.Repositories
 {
     public sealed class RepositoryManager : IRepositoryManager
     {

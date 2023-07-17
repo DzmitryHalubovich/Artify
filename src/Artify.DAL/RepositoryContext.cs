@@ -1,7 +1,7 @@
-﻿using Artify.DAL.Entities;
+﻿using Artify.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Artify.DAL
+namespace Artify.Repository
 {
     public class RepositoryContext : DbContext
     {

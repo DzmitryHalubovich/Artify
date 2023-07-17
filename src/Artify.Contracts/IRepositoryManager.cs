@@ -1,4 +1,4 @@
-﻿namespace Artify.Contracts.Repositories
+﻿namespace Artify.Repositories.Contracts
 {
     public interface IRepositoryManager
     {

@@ -1,9 +1,9 @@
-﻿using Artify.Contracts.Repositories;
-using Artify.DAL;
+﻿using Artify.DAL;
+using Artify.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Artify.BusinessLogic.Repositories
+namespace Artify.Repository.Repositories
 {
     public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {
