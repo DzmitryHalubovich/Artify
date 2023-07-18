@@ -24,5 +24,9 @@ namespace Artify.Repository.Repositories
 
         public void CreateNew(Artwork artwork) =>
             Create(artwork);
+
+        public Artwork GetByName(string name, bool trackChanges) =>
+            FindByCondition(a => a.Name.Equals(name), trackChanges)
+            .SingleOrDefault();
     }
 }

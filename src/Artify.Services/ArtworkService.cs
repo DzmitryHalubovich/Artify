@@ -61,7 +61,13 @@ namespace Artify.Services
 
             if (author is null)
                 throw new AuthorNotFoundException(artwork.AuthorId);
-            
+
+            var artworkInDb = _repository.Artwork.GetByName(artwork.ArtworkName, false);
+
+            if (artworkInDb is not null)
+                throw new ArtworkAlreadyExistsException(artwork.ArtworkName);
+
+
             await CreateAuthorFoulderIfNotExistsAsync(artwork, author.Name);
 
             var pathForDatabase = Path.Combine("ArtWorkCollection", author.Name, artwork.Image.FileName);
