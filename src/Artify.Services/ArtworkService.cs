@@ -1,19 +1,23 @@
 ﻿using Artify.Entities.DTO;
 using Artify.Entities.Exceptions;
+using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace Artify.Services
 {
     public class ArtworkService : IArtworkService
     {
+        private readonly IConfiguration _configuration;
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
-        public ArtworkService(IRepositoryManager repository, IMapper mapper)
+        public ArtworkService(IRepositoryManager repository, IMapper mapper, IConfiguration configuration)
         {
             _repository = repository;
             _mapper = mapper;
+            _configuration=configuration;
         }
 
         public IEnumerable<ArtworkDto> GetAll(bool trackChanges)
@@ -51,20 +55,52 @@ namespace Artify.Services
             return artworksDto;
         }
 
-        public ArtworkDto GetArtwork(Guid authorId, Guid artworkId, bool trackChanges)
+        public async Task<ArtworkDto> Create(ArtworkForCreationDto artwork)
         {
-            var author = _repository.Author.Get(authorId,trackChanges);
+            var author = _repository.Author.Get(artwork.AuthorId, false);
 
             if (author is null)
-                throw new AuthorNotFoundException(authorId);
+                throw new AuthorNotFoundException(artwork.AuthorId);
 
-            var artworkDto = _repository.Artwork.GetArtwork(authorId, artworkId, trackChanges);
-            if (artworkDto is null)
-                throw new ArtworkNotFoundException(artworkId);
+            var artworkInDb = _repository.Artwork.GetByName(artwork.ArtworkName, false);
 
-            var artwork = _mapper.Map<ArtworkDto>(artworkDto);
+            if (artworkInDb is not null)
+                throw new ArtworkAlreadyExistsException(artwork.ArtworkName);
 
-            return artwork;
+
+            await CreateAuthorFoulderIfNotExistsAsync(artwork, author.Name);
+
+            var pathForDatabase = Path.Combine("ArtWorkCollection", author.Name, artwork.Image.FileName);
+
+            var artworkEntity = _mapper.Map<Artwork>(artwork);
+
+            artworkEntity.ImagePath = pathForDatabase;
+
+            _repository.Artwork.CreateNew(artworkEntity);
+            _repository.Save();
+
+            var artworkToReturn = _mapper.Map<ArtworkDto>(artworkEntity);
+
+            return artworkToReturn;
+        }
+
+        private async Task CreateAuthorFoulderIfNotExistsAsync(ArtworkForCreationDto artwork, string authorName)
+        {
+            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
+
+            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
+
+            var localAuthorFoulderWithAimages = new DirectoryInfo(Path.Combine(currentProjectDirectory, authorName));
+
+            if (!localAuthorFoulderWithAimages.Exists)
+                localAuthorFoulderWithAimages.Create();
+
+            string path = Path.Combine(currentProjectDirectory, authorName, artwork.Image.FileName);
+
+            using (Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await artwork.Image.CopyToAsync(stream);
+            }
         }
     }
 }

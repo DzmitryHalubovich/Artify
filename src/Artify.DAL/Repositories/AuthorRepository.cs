@@ -18,6 +18,8 @@ namespace Artify.Repository.Repositories
                 .OrderBy(c=>c.Name)
                 .ToList();
 
-
+        public Author GetByName(string authorName) =>
+            FindByCondition(a => a.Name.Equals(authorName), false)
+                .SingleOrDefault();
     }
 }

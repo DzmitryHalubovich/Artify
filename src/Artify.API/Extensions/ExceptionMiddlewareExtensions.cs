@@ -22,6 +22,7 @@ namespace Artify.API.Extensions
                         context.Response.StatusCode = contextFeature.Error switch
                         {
                             NotFoundException => StatusCodes.Status404NotFound,
+                            AlreadyExistsException => StatusCodes.Status422UnprocessableEntity,
                             _ => StatusCodes.Status500InternalServerError
                         };
 
