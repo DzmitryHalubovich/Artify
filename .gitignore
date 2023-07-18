@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # Foulder with images
-ArtworkCollection
+artworks-collection
 
 # User-specific files
 *.rsuser
