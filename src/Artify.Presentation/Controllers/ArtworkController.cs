@@ -35,13 +35,14 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateArtwork([FromForm] ArtworkForCreationDto artwork)
+        public async Task<IActionResult> CreateArtwork([FromForm] ArtworkForCreationDto artwork)
         {
             if (artwork == null)
                 return BadRequest("ArtworkForCreationDto object is null");
 
-            var createdArtwork = _service.ArtworkService.Create(artwork);
-            return CreatedAtRoute("ArtworkById", new { id = createdArtwork.Id}, createdArtwork);
+            var createdArtwork = await _service.ArtworkService.Create(artwork);
+            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id }, 
+                createdArtwork);
         }
     }
 }

@@ -74,24 +74,29 @@ namespace Artify.Services
 
             using (Stream stream = new FileStream(path, FileMode.Create))
             {
-                //add await later
                 await artwork.Image.CopyToAsync(stream);
             }
 
-            var pathForDatabase = Path.Combine("ArtWorkCollection", artwork.ArtworkName, artwork.Image.FileName);
+            var pathForDatabase = Path.Combine("ArtWorkCollection", artwork.AuthorName, artwork.Image.FileName);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
+            artworkEntity.ImagePath = pathForDatabase;
+
+            var author = FindAuthorByName(artwork.AuthorName);
+
+            artworkEntity.AuthorId = author.Id;
+
             _repository.Artwork.CreateNew(artworkEntity);
             _repository.Save();
-
-
-
 
             var artworkToReturn = _mapper.Map<ArtworkDto>(artworkEntity);
 
             return artworkToReturn;
         }
 
+
+        private Author FindAuthorByName(string authorName) =>
+            _repository.Author.GetByName(authorName);
     }
 }

@@ -24,7 +24,5 @@ namespace Artify.Repository.Repositories
 
         public void CreateNew(Artwork artwork) =>
             Create(artwork);
-
-
     }
 }
