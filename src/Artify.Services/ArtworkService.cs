@@ -57,35 +57,18 @@ namespace Artify.Services
 
         public async Task<ArtworkDto> Create(ArtworkForCreationDto artwork)
         {
-            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
+            var author = _repository.Author.Get(artwork.AuthorId, false);
 
-            string authorLocalStoragePath = Path.Combine(localImagesStoragePath, artwork.AuthorName);
-
-            var authorImagesDirectory = new DirectoryInfo(authorLocalStoragePath); //Delete
-
-            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
+            if (author is null)
+                throw new AuthorNotFoundException(artwork.AuthorId);
             
-            var localAuthorFoulderWithAimages = new DirectoryInfo(Path.Combine(currentProjectDirectory, artwork.AuthorName));
+            await CreateAuthorFoulderIfNotExistsAsync(artwork, author.Name);
 
-            if (!localAuthorFoulderWithAimages.Exists)
-                localAuthorFoulderWithAimages.Create();
-
-            string path = Path.Combine(currentProjectDirectory, artwork.AuthorName, artwork.Image.FileName);
-
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await artwork.Image.CopyToAsync(stream);
-            }
-
-            var pathForDatabase = Path.Combine("ArtWorkCollection", artwork.AuthorName, artwork.Image.FileName);
+            var pathForDatabase = Path.Combine("ArtWorkCollection", author.Name, artwork.Image.FileName);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
             artworkEntity.ImagePath = pathForDatabase;
-
-            var author = FindAuthorByName(artwork.AuthorName);
-
-            artworkEntity.AuthorId = author.Id;
 
             _repository.Artwork.CreateNew(artworkEntity);
             _repository.Save();
@@ -95,8 +78,23 @@ namespace Artify.Services
             return artworkToReturn;
         }
 
+        private async Task CreateAuthorFoulderIfNotExistsAsync(ArtworkForCreationDto artwork, string authorName)
+        {
+            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
 
-        private Author FindAuthorByName(string authorName) =>
-            _repository.Author.GetByName(authorName);
+            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
+
+            var localAuthorFoulderWithAimages = new DirectoryInfo(Path.Combine(currentProjectDirectory, authorName));
+
+            if (!localAuthorFoulderWithAimages.Exists)
+                localAuthorFoulderWithAimages.Create();
+
+            string path = Path.Combine(currentProjectDirectory, authorName, artwork.Image.FileName);
+
+            using (Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await artwork.Image.CopyToAsync(stream);
+            }
+        }
     }
 }
