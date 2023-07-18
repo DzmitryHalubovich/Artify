@@ -21,5 +21,10 @@ namespace Artify.Repository.Repositories
             FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
                 .OrderBy(x => x.Id)
                 .ToList();
+
+        public void CreateNew(Artwork artwork) =>
+            Create(artwork);
+
+
     }
 }

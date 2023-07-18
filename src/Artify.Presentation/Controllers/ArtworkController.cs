@@ -26,7 +26,7 @@ namespace Artify.Presentation.Controllers
             return Ok(artworks);
         }
 
-        [HttpGet("{artworkId:guid}")]
+        [HttpGet("{artworkId:guid}", Name = "ArtworkById")]
         public IActionResult GetArtwork(Guid artworkId)
         {
             var artwork = _service.ArtworkService.Get(artworkId, trackChanges: false);
@@ -34,11 +34,14 @@ namespace Artify.Presentation.Controllers
             return Ok(artwork);
         }
 
-        [HttpGet("{id:guid}")]
-        public IActionResult GetArtworkForAuthor(Guid authorId, Guid artworkId)
+        [HttpPost]
+        public IActionResult CreateArtwork([FromForm] ArtworkForCreationDto artwork)
         {
-            var artwork = _service.ArtworkService.GetArtwork(authorId, artworkId, trackChanges:false);
-            return Ok(artwork);
+            if (artwork == null)
+                return BadRequest("ArtworkForCreationDto object is null");
+
+            var createdArtwork = _service.ArtworkService.Create(artwork);
+            return CreatedAtRoute("ArtworkById", new { id = createdArtwork.Id}, createdArtwork);
         }
     }
 }
