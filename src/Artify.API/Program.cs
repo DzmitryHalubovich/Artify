@@ -23,7 +23,6 @@ try
     builder.Services.ConfigureServiceManager();
     builder.Services.ConfigureSqlContext(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(Program));
-    // Add services to the container.
 
     builder.Services.AddControllers(config =>
     {
@@ -35,8 +34,6 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
-
 
     var app = builder.Build();
 
@@ -61,19 +58,14 @@ try
     }
 
     app.UseHttpsRedirection();
-
     app.UseStaticFiles();
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
         ForwardedHeaders = ForwardedHeaders.All
     });
-
     app.UseCors("CorsPolicy");
-
     app.UseAuthorization();
-
     app.MapControllers();
-
     app.Run();
 
 }

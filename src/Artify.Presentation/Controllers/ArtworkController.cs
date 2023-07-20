@@ -35,12 +35,14 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateArtwork([FromForm] ArtworkForCreationDto artwork)
         {
             if (artwork == null)
                 return BadRequest("ArtworkForCreationDto object is null");
 
             var createdArtwork = await _service.ArtworkService.Create(artwork);
+
             return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id }, 
                 createdArtwork);
         }
