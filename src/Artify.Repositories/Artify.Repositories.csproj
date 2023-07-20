@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Artify.Contracts\Artify.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\Artify.Repositories.Contracts\Artify.Repositories.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
