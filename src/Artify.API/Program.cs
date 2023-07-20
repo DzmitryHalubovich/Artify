@@ -25,7 +25,12 @@ try
     builder.Services.AddAutoMapper(typeof(Program));
     // Add services to the container.
 
-    builder.Services.AddControllers()
+    builder.Services.AddControllers(config =>
+    {
+        config.RespectBrowserAcceptHeader = true;
+        config.ReturnHttpNotAcceptable = true;
+    }).AddXmlDataContractSerializerFormatters()
+        .AddCustomCSVFormatter()
         .AddApplicationPart(typeof(Artify.Presentation.AssemblyReference).Assembly);
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();

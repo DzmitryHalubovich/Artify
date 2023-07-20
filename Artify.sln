@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories.Contrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Presentation", "src\Artify.Presentation\Artify.Presentation.csproj", "{3608604F-3A68-447D-94B4-26EC4FBC3C32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Entities", "src\Artify.Entities\Artify.Entities.csproj", "{A4697ADB-817F-43EF-9F5E-BE9088D91836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Entities", "src\Artify.Entities\Artify.Entities.csproj", "{A4697ADB-817F-43EF-9F5E-BE9088D91836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Services", "src\Artify.Services\Artify.Services.csproj", "{3C85AE59-EA79-4548-BFE2-C0B8F492A937}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Services", "src\Artify.Services\Artify.Services.csproj", "{3C85AE59-EA79-4548-BFE2-C0B8F492A937}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Services.Contracts", "src\Artify.Services.Contracts\Artify.Services.Contracts.csproj", "{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Services.Contracts", "src\Artify.Services.Contracts\Artify.Services.Contracts.csproj", "{287F42F4-0DFB-40D2-BD87-93AC6E2E2628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

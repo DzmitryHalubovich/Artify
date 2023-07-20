@@ -70,7 +70,7 @@ namespace Artify.Services
 
             await CreateAuthorFoulderIfNotExistsAsync(artwork, author.Name);
 
-            var pathForDatabase = Path.Combine("ArtWorkCollection", author.Name, artwork.Image.FileName);
+            var pathForDatabase = Path.Combine("artworks-collection", author.Name, artwork.Image.FileName);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
