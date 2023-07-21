@@ -56,6 +56,11 @@ namespace Artify.Services
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
 
+            var authorLocalStorage = new DirectoryInfo(author.StoragePath);
+
+            if (authorLocalStorage.Exists)
+                authorLocalStorage.Delete(true);
+
             _repository.Author.Delete(author);
             _repository.Save();
         }

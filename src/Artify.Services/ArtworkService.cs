@@ -73,11 +73,12 @@ namespace Artify.Services
                 await artwork.Image.CopyToAsync(stream);
             }
 
-            var pathForDatabase = Path.Combine(_configuration.GetSection("LocalImageStorageName").Value, author.Name, artwork.Image.FileName);
+            var pathForDatabase = Path.Combine(_configuration.GetSection("LocalImageStorageName").Value!, author.Name, artwork.Image.FileName);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
             artworkEntity.ImagePath = pathForDatabase;
+            artworkEntity.ImageFileName = artwork.Image.FileName;
 
             _repository.Artwork.CreateNewForAuthor(authorId,artworkEntity);
             _repository.Save();
@@ -91,11 +92,24 @@ namespace Artify.Services
         {
             var author = _repository.Author.Get(authorId, trackChanges);
             if  (author is null)
+            {
                 throw new AuthorNotFoundException(authorId);
+            }
 
             var artwork = _repository.Artwork.Get(artworkId, trackChanges);
+
             if (artwork is null)
+            {
                 throw new ArtworkNotFoundException(artworkId);
+            }
+
+            var path = Path.Combine(author.StoragePath, artwork.ImageFileName);
+            var localImageCopy = new FileInfo(path);
+
+            if (localImageCopy.Exists)
+            {
+                localImageCopy.Delete();
+            }
 
             _repository.Artwork.Delete(artwork);
             _repository.Save();

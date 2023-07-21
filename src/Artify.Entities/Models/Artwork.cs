@@ -18,6 +18,7 @@ namespace Artify.Entities.Models
         [MaxLength(512, ErrorMessage = "Maximum length for the Descritption is 512 characters.")]
         public string? Description { get; set; }
 
+        public string ImageFileName { get; set; } = default!;
         public string ImagePath { get; set; } = default!;
     }
 }
