@@ -1,6 +1,8 @@
 ﻿using Artify.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+
 
 namespace Artify.API.ContextFactory
 {
@@ -15,7 +17,7 @@ namespace Artify.API.ContextFactory
 
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
             .UseSqlServer(configuration.GetConnectionString("SqlConnection"),
-            b => b.MigrationsAssembly("Artify.DAL"));
+            b => b.MigrationsAssembly("Artify.Repositories"));
 
             return new RepositoryContext(builder.Options);
         }

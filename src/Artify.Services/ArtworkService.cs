@@ -67,9 +67,13 @@ namespace Artify.Services
             if (artworkInDb is not null)
                 throw new ArtworkAlreadyExistsException(artwork.ArtworkName);
 
-            await CreateAuthorFoulderIfNotExistsAsync(artwork, author.Name);
+            string path = Path.Combine(author.StoragePath, artwork.Image.FileName);
+            using (Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await artwork.Image.CopyToAsync(stream);
+            }
 
-            var pathForDatabase = Path.Combine("artworks-collection", author.Name, artwork.Image.FileName);
+            var pathForDatabase = Path.Combine(_configuration.GetSection("LocalImageStorageName").Value, author.Name, artwork.Image.FileName);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
@@ -95,25 +99,6 @@ namespace Artify.Services
 
             _repository.Artwork.Delete(artwork);
             _repository.Save();
-        }
-
-        private async Task CreateAuthorFoulderIfNotExistsAsync(ArtworkForCreationDto artwork, string authorName)
-        {
-            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
-
-            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
-
-            var localAuthorFoulderWithAimages = new DirectoryInfo(Path.Combine(currentProjectDirectory, authorName));
-
-            if (!localAuthorFoulderWithAimages.Exists)
-                localAuthorFoulderWithAimages.Create();
-
-            string path = Path.Combine(currentProjectDirectory, authorName, artwork.Image.FileName);
-
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await artwork.Image.CopyToAsync(stream);
-            }
         }
     }
 }

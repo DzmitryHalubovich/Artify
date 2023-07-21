@@ -1,4 +1,4 @@
 ﻿namespace Artify.Entities.DTO
 {
-    public record AuthorDto(Guid Id, string Name);
+    public record AuthorDto(Guid Id, string Name, string StoragePath);
 }

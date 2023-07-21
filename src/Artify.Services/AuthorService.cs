@@ -21,22 +21,24 @@ namespace Artify.Services
         }
 
         public  AuthorDto Create(AuthorForCreationDto author)
-        {
+         {
             var authorForDb = _mapper.Map<Author>(author);
+            
+           var authorStoragePath = CreateAuthorFoulderIfNotExistsAsync(author);
+
+            authorForDb.StoragePath = authorStoragePath;
 
             _repository.Author.Create(authorForDb);
             _repository.Save();
-
-            CreateAuthorFoulderIfNotExistsAsync(author); 
 
             var authorToReturn = _mapper.Map<AuthorDto>(authorForDb);
 
             return authorToReturn;
         }
 
-        private void CreateAuthorFoulderIfNotExistsAsync(AuthorForCreationDto author)
+        private string CreateAuthorFoulderIfNotExistsAsync(AuthorForCreationDto author)
         {
-            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
+            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value!;
 
             var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
 
@@ -44,6 +46,8 @@ namespace Artify.Services
 
             if (!localAuthorFoulderWithImages.Exists)
                 localAuthorFoulderWithImages.Create();
+
+            return localAuthorFoulderWithImages.FullName;
         }
 
         public async void Delete(Guid authorId, bool trackChanges)
