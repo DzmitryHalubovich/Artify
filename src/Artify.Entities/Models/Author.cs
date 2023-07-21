@@ -10,6 +10,7 @@ namespace Artify.Entities.Models
 
         [Required(ErrorMessage = "Author name is a required field.")]
         public string Name { get; set; }
+        public required string StoragePath { get; set; }
 
         public ICollection<Artwork>? Artworks { get; set; }
     }
