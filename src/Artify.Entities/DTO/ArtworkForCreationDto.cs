@@ -2,5 +2,5 @@
 
 namespace Artify.Entities.DTO
 {
-    public record ArtworkForCreationDto(Guid AuthorId, string ArtworkName, string? Description, IFormFile Image);
+    public record ArtworkForCreationDto(string ArtworkName, string? Description, IFormFile Image);
 }

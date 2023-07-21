@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Artify.Repositories\Artify.Repositories.csproj" />
     <ProjectReference Include="..\Artify.Presentation\Artify.Presentation.csproj" />
   </ItemGroup>
 

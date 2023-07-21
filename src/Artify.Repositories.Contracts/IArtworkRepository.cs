@@ -8,6 +8,7 @@ namespace Artify.Repositories.Contracts
         IEnumerable<Artwork> GetAllForAuthor(Guid authorId, bool trackChanges);
         Artwork Get(Guid artworkId, bool trackChanges);
         Artwork GetByName(string name, bool trackChanges);
-        void CreateNew(Artwork artwork);
+        void CreateNewForAuthor(Guid authorId ,Artwork artwork);
+        void Delete(Artwork artwork);
     }
 }

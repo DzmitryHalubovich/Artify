@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Artify.Presentation.Controllers
 {
-    [Route("api/artworks")]
+    [Route("api")]
     [ApiController]
     public class ArtworkController : ControllerBase
     {
@@ -18,15 +18,15 @@ namespace Artify.Presentation.Controllers
             _logger = logger.CreateLogger<ArtworkController>();
         }
 
-        [HttpGet]
+        [HttpGet("artworks")]
         public IActionResult GetArtworks()
         {
-            var artworks = _service.ArtworkService.GetAll(trackChanges:false);
+            var artworks = _service.ArtworkService.GetAll(trackChanges: false);
 
             return Ok(artworks);
         }
 
-        [HttpGet("{artworkId:guid}", Name = "ArtworkById")]
+        [HttpGet("artworks/{artworkId:guid}", Name = "ArtworkById")]
         public IActionResult GetArtwork(Guid artworkId)
         {
             var artwork = _service.ArtworkService.Get(artworkId, trackChanges: false);
@@ -34,17 +34,25 @@ namespace Artify.Presentation.Controllers
             return Ok(artwork);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateArtwork([FromForm] ArtworkForCreationDto artwork)
+        [HttpPost("authors/{authorId:guid}/artworks")]
+        public async Task<IActionResult> CreateArtwork(Guid authorId, [FromForm] ArtworkForCreationDto artwork)
         {
             if (artwork == null)
                 return BadRequest("ArtworkForCreationDto object is null");
 
-            var createdArtwork = await _service.ArtworkService.Create(artwork);
+            var createdArtwork =
+                await _service.ArtworkService.CreateForAuthor(authorId, artwork, trackChanges: false);
 
-            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id }, 
+            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id },
                 createdArtwork);
+        }
+
+        [HttpDelete("authors/{authorId:guid}/artworks/{artworkId:guid}")]
+        public IActionResult DeleteArtwork(Guid authorId, Guid artworkId)
+        {
+            _service.ArtworkService.Delete(authorId, artworkId, trackChanges: false);
+
+            return NoContent();
         }
     }
 }

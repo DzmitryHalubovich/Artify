@@ -7,6 +7,9 @@ namespace Artify.Services.Contracts
         IEnumerable<ArtworkDto> GetAll(bool trackChanges);
         IEnumerable<ArtworkDto> GetAllForAuthor(Guid authorId, bool trackChanges);
         ArtworkDto Get(Guid artworkId, bool trackChanges);
-        Task<ArtworkDto> Create(ArtworkForCreationDto artwork);
+        Task<ArtworkDto> CreateForAuthor(Guid authorId, 
+            ArtworkForCreationDto artwork, bool trackChanges);
+
+        void Delete(Guid authorId, Guid artworkId, bool trackChanges);
     }
 }

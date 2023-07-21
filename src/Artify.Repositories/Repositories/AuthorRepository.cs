@@ -7,6 +7,9 @@ namespace Artify.Repository.Repositories
     {
         public AuthorRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
+        public void Delete(Author author) => DeleteEntity(author);
+
+
         public Author Get(Guid authorId, bool trackChanges) =>
             FindByCondition(a => a.Id.Equals(authorId), trackChanges)
                 .SingleOrDefault();
