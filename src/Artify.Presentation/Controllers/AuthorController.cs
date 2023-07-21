@@ -26,5 +26,13 @@ namespace Artify.Presentation.Controllers
 
             return Ok(artworks);
         }
+
+        [HttpDelete("{authorId:guid}")]
+        public IActionResult DeleteAuthor(Guid authorId)
+        {
+            _service.AuthorService.Delete(authorId, trackChanges:false);
+
+            return NoContent();
+        }
     }
 }

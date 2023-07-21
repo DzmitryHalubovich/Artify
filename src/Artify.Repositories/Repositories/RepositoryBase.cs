@@ -26,7 +26,7 @@ namespace Artify.Repository.Repositories
                 _repositoryContext.Set<T>()
                     .Where(expression);
 
-        public void Create(T entity) => _repositoryContext.Set<T>().Add(entity);
-        public void Update(T entity) => _repositoryContext.Set<T>().Update(entity);
-        public void Delete(T entity) => _repositoryContext.Set<T>().Remove(entity);    }
+        public void CreateEntity(T entity) => _repositoryContext.Set<T>().Add(entity);
+        public void UpdateEntity(T entity) => _repositoryContext.Set<T>().Update(entity);
+        public void DeleteEntity(T entity) => _repositoryContext.Set<T>().Remove(entity);    }
 }

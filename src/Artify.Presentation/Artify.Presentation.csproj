@@ -16,4 +16,5 @@
     <ProjectReference Include="..\Artify.Services\Artify.Services.csproj" />
   </ItemGroup>
 
+
 </Project>

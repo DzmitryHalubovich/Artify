@@ -16,6 +16,16 @@ namespace Artify.Services
             _mapper = mapper;
         }
 
+        public async void Delete(Guid authorId, bool trackChanges)
+        {
+            var author = _repository.Author.Get(authorId, trackChanges);
+            if (author is null)
+                throw new AuthorNotFoundException(authorId);
+
+            _repository.Author.Delete(author);
+            _repository.Save();
+        }
+
         public IEnumerable<AuthorDto> GetAll(bool trackChanges)
         {
             var authors = _repository.Author.GetAllAuthors(trackChanges);

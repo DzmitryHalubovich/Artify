@@ -1,9 +1,9 @@
-﻿using Artify.Services;
-using Artify.Services.Contracts;
+﻿using Artify.Repositories.Contracts;
 using Artify.Repository;
 using Artify.Repository.Repositories;
+using Artify.Services;
+using Artify.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Artify.Repositories.Contracts;
 
 namespace Artify.API.Extensions
 {

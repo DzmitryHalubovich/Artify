@@ -22,11 +22,17 @@ namespace Artify.Repository.Repositories
                 .OrderBy(x => x.Id)
                 .ToList();
 
-        public void CreateNew(Artwork artwork) =>
-            Create(artwork);
+        public void CreateNewForAuthor(Guid authorId, Artwork artwork)
+        {
+            artwork.AuthorId = authorId;
+            CreateEntity(artwork);
+        }
 
         public Artwork GetByName(string name, bool trackChanges) =>
             FindByCondition(a => a.Name.Equals(name), trackChanges)
             .SingleOrDefault();
+
+        public void Delete(Artwork artwork) => DeleteEntity(artwork);
+
     }
 }
