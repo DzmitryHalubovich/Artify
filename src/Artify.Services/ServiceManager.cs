@@ -15,7 +15,7 @@ namespace Artify.Services
             _artworkService = new Lazy<IArtworkService>(() => 
                     new ArtworkService(repositoryManager, mapper, configuration));
             _authorService = new Lazy<IAuthorService>(() => 
-                    new AuthorService(repositoryManager, mapper));
+                    new AuthorService(repositoryManager, mapper, configuration));
         }
         public IArtworkService ArtworkService => _artworkService.Value;
 

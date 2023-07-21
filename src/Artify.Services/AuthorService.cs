@@ -4,6 +4,7 @@ using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace Artify.Services
 {
@@ -11,22 +12,38 @@ namespace Artify.Services
     {
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
-        public AuthorService(IRepositoryManager repository, IMapper mapper)
+        private readonly IConfiguration _configuration;
+        public AuthorService(IRepositoryManager repository, IMapper mapper, IConfiguration configuration)
         {
             _repository = repository;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
-        public AuthorDto Create(AuthorForCreationDto author)
+        public  AuthorDto Create(AuthorForCreationDto author)
         {
             var authorForDb = _mapper.Map<Author>(author);
 
             _repository.Author.Create(authorForDb);
             _repository.Save();
 
+            CreateAuthorFoulderIfNotExistsAsync(author); 
+
             var authorToReturn = _mapper.Map<AuthorDto>(authorForDb);
 
             return authorToReturn;
+        }
+
+        private void CreateAuthorFoulderIfNotExistsAsync(AuthorForCreationDto author)
+        {
+            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
+
+            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
+
+            var localAuthorFoulderWithImages = new DirectoryInfo(Path.Combine(currentProjectDirectory, author.Name));
+
+            if (!localAuthorFoulderWithImages.Exists)
+                localAuthorFoulderWithImages.Create();
         }
 
         public async void Delete(Guid authorId, bool trackChanges)

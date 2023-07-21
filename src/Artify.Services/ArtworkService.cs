@@ -83,6 +83,20 @@ namespace Artify.Services
             return artworkToReturn;
         }
 
+        public void Delete(Guid authorId, Guid artworkId, bool trackChanges)
+        {
+            var author = _repository.Author.Get(authorId, trackChanges);
+            if  (author is null)
+                throw new AuthorNotFoundException(authorId);
+
+            var artwork = _repository.Artwork.Get(artworkId, trackChanges);
+            if (artwork is null)
+                throw new ArtworkNotFoundException(artworkId);
+
+            _repository.Artwork.Delete(artwork);
+            _repository.Save();
+        }
+
         private async Task CreateAuthorFoulderIfNotExistsAsync(ArtworkForCreationDto artwork, string authorName)
         {
             string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value;
@@ -100,20 +114,6 @@ namespace Artify.Services
             {
                 await artwork.Image.CopyToAsync(stream);
             }
-        }
-
-        public void Delete(Guid authorId, Guid artworkId, bool trackChanges)
-        {
-            var author = _repository.Author.Get(authorId, trackChanges);
-            if  (author is null)
-                throw new AuthorNotFoundException(authorId);
-
-            var artwork = _repository.Artwork.Get(artworkId, trackChanges);
-            if (artwork is null)
-                throw new ArtworkNotFoundException(artworkId);
-
-            _repository.Artwork.Delete(artwork);
-            _repository.Save();
         }
     }
 }
