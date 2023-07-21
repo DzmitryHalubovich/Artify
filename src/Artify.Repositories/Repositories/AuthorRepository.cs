@@ -7,6 +7,8 @@ namespace Artify.Repository.Repositories
     {
         public AuthorRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
+        public void Create(Author author) => CreateEntity(author);
+
         public void Delete(Author author) => DeleteEntity(author);
 
 
@@ -24,5 +26,7 @@ namespace Artify.Repository.Repositories
         public Author GetByName(string authorName) =>
             FindByCondition(a => a.Name.Equals(authorName), false)
                 .SingleOrDefault();
+
+
     }
 }

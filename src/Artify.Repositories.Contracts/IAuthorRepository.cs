@@ -8,5 +8,6 @@ namespace Artify.Repositories.Contracts
         Author Get(Guid authorId, bool trackChanges);
         Author GetByName(string authorName);
         void Delete(Author author);
+        void Create(Author author);
     }
 }
