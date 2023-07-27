@@ -12,7 +12,7 @@ namespace Artify.API.ContextFactory
             IConfigurationRoot configuration = new ConfigurationBuilder()
                  .SetBasePath(Directory.GetCurrentDirectory())
                  .AddJsonFile("appsettings.json")
-                  .Build();
+                 .Build();
 
             var builder = new DbContextOptionsBuilder<RepositoryContext>();
             var connectionString = configuration.GetConnectionString("SqlConnection");
