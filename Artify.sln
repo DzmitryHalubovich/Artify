@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories.Contrac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories", "src\Artify.Repositories\Artify.Repositories.csproj", "{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B463317-883C-4DCF-8F83-5BEB51F7EC34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.API.Tests", "src\Tests\Artify.API.Tests\Artify.API.Tests.csproj", "{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,9 +61,16 @@ Global
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FAEC480-0E64-4A61-9E19-086024D8BC8C}
