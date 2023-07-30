@@ -1,24 +1,30 @@
 ﻿@page "/artwork/{Id:guid}"
-@inherits ArtworkDetailsBase
+@inject HttpClient Http
 
-@if (ErrorMessage != null)
-{
-    <h3>@ErrorMessage</h3>
-}
-else
-{
-    <div class ="container">
-        <div class="row">
-            <div class="col-8">
-                <img src="@Artwork.ImagePath" class="img-fluid" alt="@Artwork.Name">
-            </div>
-            <div class="col-4" style="color:#fff">
-                <h1>@Artwork.Name</h1>
-                <p>
-                    @Artwork.Description
-                </p>
-            </div>
+
+<div class ="container">
+    <div class="row">
+        <div class="col-8">
+            <img src="@artwork.ImagePath" class="img-fluid" alt="@artwork.Name">
+        </div>
+        <div class="col-4" style="color:#fff">
+            <h1>@artwork.Name</h1>
+            <p>
+                @artwork.Description
+            </p>
         </div>
     </div>
+</div>
 
+@code{
+
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private ArtworkDto artwork;
+
+    protected override async Task OnInitializedAsync()
+    {
+        artwork = await Http.GetFromJsonAsync<ArtworkDto>($"api/artworks/{Id}");
+    }
 }

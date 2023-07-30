@@ -1,0 +1,59 @@
+﻿@page "/artworks/create"
+@using System
+@using System.IO
+@inject HttpClient Http
+
+<h2>Create new artwork</h2>
+
+<form>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Author Id</span>
+        <InputText class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" @bind-Value=newArtwork.AuthorId ParsingErrorMessage="Must be a date" />
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+        <InputText class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" @bind-Value=newArtwork.Title ParsingErrorMessage="Must be a date" />
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+        <InputTextArea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" @bind-Value=newArtwork.Description ParsingErrorMessage="Must be a date" />
+    </div>
+
+    <div class="input-group mb-3">
+        <InputFile OnChange=@LoadFiles class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  />
+    </div>
+
+    <button @onclick="() => AddNewArtwork(newArtwork)"
+            type="submit" class="btn btn-primary">
+        Create
+    </button>
+</form>
+
+@code{
+    NewArtwork newArtwork = new NewArtwork();
+
+    private IFormFile loadedImage;
+    private IBrowserFile? file;
+
+    class NewArtwork
+    {
+        public string AuthorId { get; set; }
+        public string Title { get; set; }
+        public string? Description { get; set; }
+        public IFormFile Image { get; set; }
+    }
+
+    async Task AddNewArtwork(NewArtwork artwork)
+    {
+        var json = JsonSerializer.Serialize(artwork);
+        await Http.PostAsJsonAsync("api/artworks"+$"/{artwork.AuthorId}", artwork);
+    }
+
+    private void LoadFiles(InputFileChangeEventArgs e)
+    {
+        file = e.File;
+    }
+
+}
