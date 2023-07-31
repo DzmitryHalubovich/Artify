@@ -1,5 +1,6 @@
 using Artify.API.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration() //#1
@@ -59,6 +60,12 @@ try
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
+/*    app.UseStaticFiles(new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+        RequestPath = new PathString("/StaticFiles")
+    });*/
+
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
         ForwardedHeaders = ForwardedHeaders.All

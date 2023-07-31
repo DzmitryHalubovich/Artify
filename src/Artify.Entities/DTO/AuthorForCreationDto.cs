@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Artify.Entities.DTO
 {
-    public record AuthorForCreationDto(string Name);
+    public record AuthorForCreationDto 
+    {
+        [Required(ErrorMessage = "Author name is a required field.")]
+        [MaxLength(20, ErrorMessage = "Maximum length for the Name is 20 characters.")]
+        public string Name { get; init; }
+    }
 
 }

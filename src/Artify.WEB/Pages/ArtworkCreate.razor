@@ -2,13 +2,14 @@
 @using System
 @using System.IO
 @inject HttpClient Http
+@inject IConfiguration config
 
 <h2>Create new artwork</h2>
 
-<form>
+<EditForm Model="newArtwork">
     <div class="input-group mb-3">
         <span class="input-group-text" id="inputGroup-sizing-default">Author Id</span>
-        <InputText class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" @bind-Value=newArtwork.AuthorId ParsingErrorMessage="Must be a date" />
+        <InputText class="form-control" @bind-Value=newArtwork.AuthorId ParsingErrorMessage="Must be a date" />
     </div>
 
     <div class="input-group mb-3">
@@ -22,20 +23,33 @@
     </div>
 
     <div class="input-group mb-3">
-        <InputFile OnChange=@LoadFiles class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  />
+        <InputFile OnChange=@LoadFiles class="form-control" accept=".png, .jpg, .jpeg" />
     </div>
 
+    @if (errors.Count > 0)
+    {
+        <h2>Errors</h2>
+        <ul class="text-danger">
+            @foreach (var error in errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    }
+
     <button @onclick="() => AddNewArtwork(newArtwork)"
-            type="submit" class="btn btn-primary">
-        Create
+            type="submit" class="btn btn-primary mt-3">
+        Create artwork
     </button>
-</form>
+</EditForm>
 
 @code{
     NewArtwork newArtwork = new NewArtwork();
 
-    private IFormFile loadedImage;
     private IBrowserFile? file;
+    private long maxFileSize = 1024 * 1024 * 3;
+    private int maxAllowedFiles = 3;
+    private List<string> errors = new();
 
     class NewArtwork
     {
@@ -51,9 +65,10 @@
         await Http.PostAsJsonAsync("api/artworks"+$"/{artwork.AuthorId}", artwork);
     }
 
-    private void LoadFiles(InputFileChangeEventArgs e)
+    private async Task LoadFiles(InputFileChangeEventArgs e)
     {
         file = e.File;
+
     }
 
 }

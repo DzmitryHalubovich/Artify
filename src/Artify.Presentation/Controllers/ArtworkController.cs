@@ -6,7 +6,6 @@ using Microsoft.Extensions.Logging;
 namespace Artify.Presentation.Controllers
 {
     [Route("api")]
-    [ApiController]
     public class ArtworkController : ControllerBase
     {
         private readonly IServiceManager _service;
@@ -39,6 +38,9 @@ namespace Artify.Presentation.Controllers
         {
             if (artwork == null)
                 return BadRequest("ArtworkForCreationDto object is null");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
 
             var createdArtwork =
                 await _service.ArtworkService.CreateForAuthor(authorId, artwork, trackChanges: false);

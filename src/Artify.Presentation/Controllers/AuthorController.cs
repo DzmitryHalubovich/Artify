@@ -1,11 +1,11 @@
 ﻿using Artify.Entities.DTO;
+using Artify.Entities.Models;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artify.Presentation.Controllers
 {
     [Route("api/authors")]
-    [ApiController]
     public class AuthorController : ControllerBase
     {
         private readonly IServiceManager _service;
@@ -47,7 +47,13 @@ namespace Artify.Presentation.Controllers
         [HttpPost]
         public IActionResult CreateAuthor(AuthorForCreationDto author)
         {
-           var createdAuthor =  _service.AuthorService.Create(author);
+            if (author == null)
+                return BadRequest("AuthorForCreationDto object is null");
+
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
+            var createdAuthor =  _service.AuthorService.Create(author);
 
             return CreatedAtRoute("AuthorById", new { authorId = createdAuthor.Id }, createdAuthor);
         }
