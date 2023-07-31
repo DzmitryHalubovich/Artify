@@ -1,4 +1,5 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.API.Filters;
+using Artify.Entities.DTO;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,14 +45,9 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateAuthor(AuthorForCreationDto author)
         {
-            if (author == null)
-                return BadRequest("AuthorForCreationDto object is null");
-
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
-
             var createdAuthor = await  _service.AuthorService.CreateAsync(author);
 
             return CreatedAtRoute("AuthorById", new { authorId = createdAuthor.Id }, createdAuthor);

@@ -1,4 +1,5 @@
 using Artify.API.Extensions;
+using Artify.API.Filters;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
@@ -24,6 +25,7 @@ try
     builder.Services.ConfigureServiceManager();
     builder.Services.ConfigureSqlContext(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(Program));
+    builder.Services.AddScoped<ValidationFilterAttribute>();
 
     builder.Services.AddControllers(config =>
     {
@@ -35,6 +37,7 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
 
     var app = builder.Build();
 

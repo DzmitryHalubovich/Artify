@@ -1,4 +1,5 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.API.Filters;
+using Artify.Entities.DTO;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,14 +35,9 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpPost("authors/{authorId:guid}/artworks")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateArtwork(Guid authorId, [FromForm] ArtworkForCreationDto artwork)
         {
-            if (artwork == null)
-                return BadRequest("ArtworkForCreationDto object is null");
-
-            if (!ModelState.IsValid)
-                return UnprocessableEntity(ModelState);
-
             var createdArtwork =
                 await _service.ArtworkService.CreateForAuthorAsync(authorId, artwork, trackChanges: false);
 
