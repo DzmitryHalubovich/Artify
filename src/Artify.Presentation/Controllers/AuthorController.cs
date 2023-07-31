@@ -1,5 +1,4 @@
 ﻿using Artify.Entities.DTO;
-using Artify.Entities.Models;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,39 +12,39 @@ namespace Artify.Presentation.Controllers
         public AuthorController(IServiceManager service) => _service = service;
 
         [HttpGet]
-        public IActionResult GetAuthors()
+        public async Task<IActionResult> GetAuthors()
         {
-            var authors = _service.AuthorService.GetAll(trackChanges:false);
+            var authors = await _service.AuthorService.GetAllAsync(trackChanges:false);
 
             return Ok(authors);
         }
 
         [HttpGet("{authorId:guid}", Name = "AuthorById")]
-        public IActionResult GetAuthorById(Guid authorId)
+        public async Task<IActionResult> GetAuthorById(Guid authorId)
         {
-            var author = _service.AuthorService.Get(authorId, trackChanges: false);
+            var author = await _service.AuthorService.GetByIdAsync(authorId, trackChanges: false);
 
             return Ok(author);
         }
 
         [HttpGet("{authorId}/artworks")]
-        public IActionResult GetArtworksForAuthor(Guid authorId)
+        public async Task<IActionResult> GetArtworksForAuthor(Guid authorId)
         {
-            var artworks = _service.ArtworkService.GetAllForAuthor(authorId, false);
+            var artworks = await _service.ArtworkService.GetAllForAuthorAsync(authorId, false);
 
             return Ok(artworks);
         }
 
         [HttpDelete("{authorId:guid}")]
-        public IActionResult DeleteAuthor(Guid authorId)
+        public async Task<IActionResult> DeleteAuthor(Guid authorId)
         {
-            _service.AuthorService.Delete(authorId, trackChanges:false);
+            await _service.AuthorService.DeleteAsync(authorId, trackChanges:false);
 
             return NoContent();
         }
 
         [HttpPost]
-        public IActionResult CreateAuthor(AuthorForCreationDto author)
+        public async Task<IActionResult> CreateAuthor(AuthorForCreationDto author)
         {
             if (author == null)
                 return BadRequest("AuthorForCreationDto object is null");
@@ -53,7 +52,7 @@ namespace Artify.Presentation.Controllers
             if (!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            var createdAuthor =  _service.AuthorService.Create(author);
+            var createdAuthor = await  _service.AuthorService.CreateAsync(author);
 
             return CreatedAtRoute("AuthorById", new { authorId = createdAuthor.Id }, createdAuthor);
         }

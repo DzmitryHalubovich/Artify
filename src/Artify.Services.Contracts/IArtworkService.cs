@@ -4,12 +4,12 @@ namespace Artify.Services.Contracts
 {
     public interface IArtworkService
     {
-        IEnumerable<ArtworkDto> GetAll(bool trackChanges);
-        IEnumerable<ArtworkDto> GetAllForAuthor(Guid authorId, bool trackChanges);
-        ArtworkDto Get(Guid artworkId, bool trackChanges);
-        Task<ArtworkDto> CreateForAuthor(Guid authorId, 
+        Task<IEnumerable<ArtworkDto>> GetAllAsync(bool trackChanges);
+        Task<IEnumerable<ArtworkDto>> GetAllForAuthorAsync(Guid authorId, bool trackChanges);
+        Task<ArtworkDto> GetByIdAsync(Guid artworkId, bool trackChanges);
+        Task<ArtworkDto> CreateForAuthorAsync(Guid authorId, 
             ArtworkForCreationDto artwork, bool trackChanges);
 
-        void Delete(Guid authorId, Guid artworkId, bool trackChanges);
+        Task DeleteAsync(Guid authorId, Guid artworkId, bool trackChanges);
     }
 }

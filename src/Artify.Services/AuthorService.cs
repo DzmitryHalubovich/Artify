@@ -20,7 +20,7 @@ namespace Artify.Services
             _configuration = configuration;
         }
 
-        public  AuthorDto Create(AuthorForCreationDto author)
+        public  async Task<AuthorDto> CreateAsync(AuthorForCreationDto author)
          {
             var authorForDb = _mapper.Map<Author>(author);
             
@@ -29,7 +29,7 @@ namespace Artify.Services
             authorForDb.StoragePath = authorStoragePath;
 
             _repository.Author.Create(authorForDb);
-            _repository.Save();
+           await _repository.SaveAsync();
 
             var authorToReturn = _mapper.Map<AuthorDto>(authorForDb);
 
@@ -50,9 +50,9 @@ namespace Artify.Services
             return localAuthorFoulderWithImages.FullName;
         }
 
-        public async void Delete(Guid authorId, bool trackChanges)
+        public async Task DeleteAsync(Guid authorId, bool trackChanges)
         {
-            var author = _repository.Author.Get(authorId, trackChanges);
+            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
 
@@ -62,12 +62,12 @@ namespace Artify.Services
                 authorLocalStorage.Delete(true);
 
             _repository.Author.Delete(author);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
 
-        public AuthorDto Get(Guid authorId, bool trackChanges)
+        public async Task<AuthorDto> GetByIdAsync(Guid authorId, bool trackChanges)
         {
-            var author = _repository.Author.Get(authorId, trackChanges);
+            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
             
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
@@ -77,9 +77,9 @@ namespace Artify.Services
             return returnAuthor;
         }
 
-        public IEnumerable<AuthorDto> GetAll(bool trackChanges)
+        public async Task<IEnumerable<AuthorDto>> GetAllAsync(bool trackChanges)
         {
-            var authors = _repository.Author.GetAllAuthors(trackChanges);
+            var authors = await _repository.Author.GetAllAuthorsAsync(trackChanges);
 
             var authorsDto = _mapper.Map<IEnumerable<AuthorDto>>(authors);
 

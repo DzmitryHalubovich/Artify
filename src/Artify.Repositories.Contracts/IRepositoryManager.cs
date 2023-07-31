@@ -4,6 +4,6 @@
     {
         IArtworkRepository Artwork { get; }
         IAuthorRepository Author { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artify.Repository.Repositories
 {
@@ -12,21 +13,18 @@ namespace Artify.Repository.Repositories
         public void Delete(Author author) => DeleteEntity(author);
 
 
-        public Author Get(Guid authorId, bool trackChanges) =>
-            FindByCondition(a => a.Id.Equals(authorId), trackChanges)
-                .SingleOrDefault();
-            
+        public async Task<Author> GetByIdAsync(Guid authorId, bool trackChanges) => 
+            await FindByCondition(a => a.Id.Equals(authorId), trackChanges)
+                .SingleOrDefaultAsync();
 
-
-        public IEnumerable<Author> GetAllAuthors(bool trackChanges) =>
-            FindAll(trackChanges)
+        public async Task<IEnumerable<Author>> GetAllAuthorsAsync(bool trackChanges) => 
+            await FindAll(trackChanges)
                 .OrderBy(c=>c.Name)
-                .ToList();
+                .ToListAsync();
 
-        public Author GetByName(string authorName) =>
-            FindByCondition(a => a.Name.Equals(authorName), false)
-                .SingleOrDefault();
-
+        public async Task<Author> GetByName(string authorName) => 
+            await FindByCondition(a => a.Name.Equals(authorName), false)
+                .SingleOrDefaultAsync();
 
     }
 }

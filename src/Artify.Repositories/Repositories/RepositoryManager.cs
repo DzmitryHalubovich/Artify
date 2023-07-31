@@ -21,6 +21,6 @@ namespace Artify.Repository.Repositories
         public IArtworkRepository Artwork => _artworkRepository.Value;
         public IAuthorRepository Author => _authorRepository.Value;
 
-        public void Save() => _repositoryContext.SaveChanges();
+        public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
     }
 }

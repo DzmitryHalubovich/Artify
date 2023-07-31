@@ -18,17 +18,17 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpGet("artworks")]
-        public IActionResult GetArtworks()
+        public async Task<IActionResult> GetArtworks()
         {
-            var artworks = _service.ArtworkService.GetAll(trackChanges: false);
+            var artworks = await _service.ArtworkService.GetAllAsync(trackChanges: false);
 
             return Ok(artworks);
         }
 
         [HttpGet("artworks/{artworkId:guid}", Name = "ArtworkById")]
-        public IActionResult GetArtwork(Guid artworkId)
+        public async Task<IActionResult> GetArtwork(Guid artworkId)
         {
-            var artwork = _service.ArtworkService.Get(artworkId, trackChanges: false);
+            var artwork = await _service.ArtworkService.GetByIdAsync(artworkId, trackChanges: false);
 
             return Ok(artwork);
         }
@@ -43,16 +43,16 @@ namespace Artify.Presentation.Controllers
                 return UnprocessableEntity(ModelState);
 
             var createdArtwork =
-                await _service.ArtworkService.CreateForAuthor(authorId, artwork, trackChanges: false);
+                await _service.ArtworkService.CreateForAuthorAsync(authorId, artwork, trackChanges: false);
 
             return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id },
                 createdArtwork);
         }
 
         [HttpDelete("authors/{authorId:guid}/artworks/{artworkId:guid}")]
-        public IActionResult DeleteArtwork(Guid authorId, Guid artworkId)
+        public async Task<IActionResult> DeleteArtwork(Guid authorId, Guid artworkId)
         {
-            _service.ArtworkService.Delete(authorId, artworkId, trackChanges: false);
+            await _service.ArtworkService.DeleteAsync(authorId, artworkId, trackChanges: false);
 
             return NoContent();
         }

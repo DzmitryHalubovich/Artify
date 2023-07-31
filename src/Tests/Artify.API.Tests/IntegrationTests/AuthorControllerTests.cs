@@ -61,7 +61,7 @@ namespace Artify.API.Tests.IntegrationTests
                 });
             var httpClient = appFactory.CreateClient();
 
-            var newAuthor = new AuthorForCreationDto("Thomas");
+            var newAuthor = new AuthorForCreationDto() { Name = "Thomas" };
 
             var json = JsonSerializer.Serialize(newAuthor);
 
