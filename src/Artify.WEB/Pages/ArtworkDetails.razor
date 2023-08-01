@@ -1,0 +1,15 @@
+﻿@page "/artworks/{Id:guid}"
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <img src="@artwork.ImageUrl" class="img-fluid" alt="@artwork.Title">
+        </div>
+        <div class="col-4 description" style="color:#fff">
+            <h1>@artwork.Title</h1>
+            <p>
+                @artwork.Description
+            </p>
+        </div>
+    </div>
+</div>

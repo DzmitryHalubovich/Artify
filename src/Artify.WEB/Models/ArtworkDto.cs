@@ -2,9 +2,11 @@
 {
     public class ArtworkDto
     {
-        public Guid Id { get; init; }
-        public required string Title { get; init; }
-        public string? Description { get; init; }
-        public required string ImageUrl { get; init; }
+        public Guid Id { get; set; }
+        public string Title { get; set; } = default!;
+
+        public string? Description { get; set; }
+
+        public string ImageUrl { get; set; } = default!;
     }
 }
