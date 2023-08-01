@@ -1,6 +1,5 @@
 using Artify.WEB;
 using Artify.WEB.Services;
-using Artify.WEB.Services.Contracts;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 

@@ -62,19 +62,7 @@ namespace Artify.Services
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
 
-            string path = Path.Combine(author.StoragePath, artwork.Image.FileName);
-
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await artwork.Image.CopyToAsync(stream);
-            }
-
-            var pathForDatabase = Path.Combine(_configuration.GetSection("LocalImageStorageName").Value!, author.Name, artwork.Image.FileName);
-
             var artworkEntity = _mapper.Map<Artwork>(artwork);
-
-            artworkEntity.ImagePath = pathForDatabase;
-            artworkEntity.ImageFileName = artwork.Image.FileName;
 
             _repository.Artwork.CreateNewForAuthor(authorId,artworkEntity);
             await _repository.SaveAsync();
@@ -99,7 +87,7 @@ namespace Artify.Services
                 throw new ArtworkNotFoundException(artworkId);
             }
 
-            var path = Path.Combine(author.StoragePath, artwork.ImageFileName);
+            var path = Path.Combine(artwork.ImageUrl);
             var localImageCopy = new FileInfo(path);
 
             if (localImageCopy.Exists)

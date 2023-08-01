@@ -36,7 +36,7 @@ namespace Artify.Presentation.Controllers
 
         [HttpPost("authors/{authorId:guid}/artworks")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> CreateArtwork(Guid authorId, [FromForm] ArtworkForCreationDto artwork)
+        public async Task<IActionResult> CreateArtwork(Guid authorId, [FromBody] ArtworkForCreationDto artwork)
         {
             var createdArtwork =
                 await _service.ArtworkService.CreateForAuthorAsync(authorId, artwork, trackChanges: false);

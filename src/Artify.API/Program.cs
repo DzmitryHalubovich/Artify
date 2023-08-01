@@ -63,11 +63,11 @@ try
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
-/*    app.UseStaticFiles(new StaticFileOptions()
+    app.UseStaticFiles(new StaticFileOptions()
     {
-        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
-        RequestPath = new PathString("/StaticFiles")
-    });*/
+        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"artworks-collection")),
+        RequestPath = new PathString("/artworks-collection")
+    });
 
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
