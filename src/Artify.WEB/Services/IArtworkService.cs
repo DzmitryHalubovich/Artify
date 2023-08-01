@@ -6,6 +6,7 @@ namespace Artify.WEB.Services
     public interface IArtworkService
     {
         Task<IEnumerable<ArtworkDto>> GetArtworks();
+        Task<ArtworkDto> GetArtwork(Guid id);
         Task CreateArtwork(Artwork product);
         Task<string> UploadProductImage(MultipartFormDataContent content);
 

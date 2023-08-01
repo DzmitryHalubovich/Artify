@@ -30,6 +30,12 @@ namespace Artify.WEB.Services
             }
         }
 
+        public async Task<ArtworkDto> GetArtwork(Guid artworkId)
+        {
+            var product = await _client.GetFromJsonAsync<ArtworkDto>($"/api/artworks/{artworkId}");
+            return product;
+        }
+
         public async Task<IEnumerable<ArtworkDto>> GetArtworks()
         {
             var response = await _client.GetAsync("api/artworks");
