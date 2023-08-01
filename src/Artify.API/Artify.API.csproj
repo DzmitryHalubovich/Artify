@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Artify.Presentation\Artify.Presentation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="artworks-collection\" />
+  </ItemGroup>
+
 </Project>

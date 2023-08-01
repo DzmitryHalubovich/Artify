@@ -1,6 +1,7 @@
 ﻿using Artify.DAL;
 using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artify.Repository.Repositories
 {
@@ -8,19 +9,19 @@ namespace Artify.Repository.Repositories
     {
         public ArtworkRepository(RepositoryContext repositoryContext) : base(repositoryContext) { }
 
-        public IEnumerable<Artwork> GetAll(bool trackChanges) =>
-            FindAll(trackChanges)
-                .OrderBy(x => x.Id)
-                .ToList();
+        public async Task<IEnumerable<Artwork>> GetAllAsync(bool trackChanges) => 
+            await FindAll(trackChanges)
+            .OrderBy(x => x.Id)
+            .ToListAsync();
 
-        public Artwork Get(Guid artworkId, bool trackChanges) =>
-            FindByCondition(a => a.Id.Equals(artworkId), trackChanges)
-                .SingleOrDefault();
+        public async Task<Artwork> GetByIdAsync(Guid artworkId, bool trackChanges) =>
+            await FindByCondition(a => a.Id.Equals(artworkId), trackChanges)
+                .SingleOrDefaultAsync();
 
-        public IEnumerable<Artwork> GetAllForAuthor(Guid authorId, bool trackChanges) =>
-            FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
+        public async Task<IEnumerable<Artwork>> GetAllForAuthorAsync(Guid authorId, bool trackChanges) =>
+           await FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
                 .OrderBy(x => x.Id)
-                .ToList();
+                .ToListAsync();
 
         public void CreateNewForAuthor(Guid authorId, Artwork artwork)
         {
@@ -28,11 +29,6 @@ namespace Artify.Repository.Repositories
             CreateEntity(artwork);
         }
 
-        public Artwork GetByName(string name, bool trackChanges) =>
-            FindByCondition(a => a.Name.Equals(name), trackChanges)
-            .SingleOrDefault();
-
         public void Delete(Artwork artwork) => DeleteEntity(artwork);
-
     }
 }

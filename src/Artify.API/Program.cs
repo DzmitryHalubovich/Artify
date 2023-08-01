@@ -1,5 +1,7 @@
 using Artify.API.Extensions;
+using Artify.API.Filters;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
 
 Log.Logger = new LoggerConfiguration() //#1
@@ -23,6 +25,7 @@ try
     builder.Services.ConfigureServiceManager();
     builder.Services.ConfigureSqlContext(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(Program));
+    builder.Services.AddScoped<ValidationFilterAttribute>();
 
     builder.Services.AddControllers(config =>
     {
@@ -34,6 +37,7 @@ try
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
 
     var app = builder.Build();
 
@@ -59,6 +63,12 @@ try
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
+    app.UseStaticFiles(new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"artworks-collection")),
+        RequestPath = new PathString("/artworks-collection")
+    });
+
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
         ForwardedHeaders = ForwardedHeaders.All

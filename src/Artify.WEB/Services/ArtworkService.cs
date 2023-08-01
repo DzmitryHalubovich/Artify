@@ -1,27 +1,61 @@
-﻿using Artify.Entities.DTO;
-using Artify.WEB.Services.Contracts;
+﻿using Artify.Entities.Models;
+using Artify.WEB.Models;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 
 namespace Artify.WEB.Services
 {
     public class ArtworkService : IArtworkService
     {
-        private readonly HttpClient _httpClient;
-        public ArtworkService(HttpClient httpClient)
+        private readonly HttpClient _client;
+        private readonly JsonSerializerOptions _options;
+        public ArtworkService(HttpClient client)
         {
-            _httpClient = httpClient;
+            _client = client;
+            _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        }
+
+        public async Task CreateArtwork(Artwork artwork)
+        {
+            var content = JsonSerializer.Serialize(artwork);
+            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+            var postResult = await _client.PostAsync($"api/authors/{artwork.AuthorId}/artworks", bodyContent);
+            var postContent = await postResult.Content.ReadAsStringAsync();
+
+            if (!postResult.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(postContent);
+            }
         }
 
         public async Task<IEnumerable<ArtworkDto>> GetArtworks()
         {
-            try
+            var response = await _client.GetAsync("api/artworks");
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
             {
-                var artworks = await _httpClient.GetFromJsonAsync<IEnumerable<ArtworkDto>>("api/artworks");
-                return artworks;
+                throw new ApplicationException(content);
             }
-            catch (Exception)
+
+            var artworks = JsonSerializer.Deserialize<List<ArtworkDto>>(content, _options);
+            return artworks;
+        }
+
+        public async Task<string> UploadProductImage(MultipartFormDataContent content)
+        {
+            var postResult = await _client.PostAsync("api/upload", content);
+            var postContent = await postResult.Content.ReadAsStringAsync();
+            if (!postResult.IsSuccessStatusCode)
             {
-                throw;
+                throw new ApplicationException(postContent);
+            }
+            else
+            {
+                var imgUrl = Path.Combine("https://localhost:7062", postContent);
+                return imgUrl;
             }
         }
     }

@@ -4,10 +4,9 @@ namespace Artify.Repositories.Contracts
 {
     public interface IArtworkRepository
     {
-        IEnumerable<Artwork> GetAll(bool trackChanges);
-        IEnumerable<Artwork> GetAllForAuthor(Guid authorId, bool trackChanges);
-        Artwork Get(Guid artworkId, bool trackChanges);
-        Artwork GetByName(string name, bool trackChanges);
+        Task<IEnumerable<Artwork>> GetAllAsync(bool trackChanges);
+        Task<IEnumerable<Artwork>> GetAllForAuthorAsync(Guid authorId, bool trackChanges);
+        Task<Artwork> GetByIdAsync(Guid artworkId, bool trackChanges);
         void CreateNewForAuthor(Guid authorId ,Artwork artwork);
         void Delete(Artwork artwork);
     }

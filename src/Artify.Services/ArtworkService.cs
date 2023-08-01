@@ -20,18 +20,18 @@ namespace Artify.Services
             _configuration=configuration;
         }
 
-        public IEnumerable<ArtworkDto> GetAll(bool trackChanges)
+        public async Task<IEnumerable<ArtworkDto>> GetAllAsync(bool trackChanges)
         {
-            var artworks = _repository.Artwork.GetAll(trackChanges);
+            var artworks = await _repository.Artwork.GetAllAsync(trackChanges);
 
             var artworksDto = _mapper.Map<IEnumerable< ArtworkDto>>(artworks);
 
             return artworksDto;
         }
 
-        public ArtworkDto Get(Guid id, bool trackChanges)
+        public async Task<ArtworkDto> GetByIdAsync(Guid id, bool trackChanges)
         {
-            var artwork = _repository.Artwork.Get(id, trackChanges);
+            var artwork = await _repository.Artwork.GetByIdAsync(id, trackChanges);
 
             if (artwork is null)
                 throw new ArtworkNotFoundException(id);
@@ -41,69 +41,53 @@ namespace Artify.Services
             return artworkDto;
         }
 
-        public IEnumerable<ArtworkDto> GetAllForAuthor(Guid authorId, bool trackChanges)
+        public async Task<IEnumerable<ArtworkDto>> GetAllForAuthorAsync(Guid authorId, bool trackChanges)
         {
-            var author = _repository.Author.Get(authorId, trackChanges);
+            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
 
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
 
-            var artworks = _repository.Artwork.GetAllForAuthor(authorId, trackChanges);
+            var artworks = await _repository.Artwork.GetAllForAuthorAsync(authorId, trackChanges);
 
             var artworksDto = _mapper.Map<IEnumerable<ArtworkDto>>(artworks);
 
             return artworksDto;
         }
 
-        public async Task<ArtworkDto> CreateForAuthor(Guid authorId, ArtworkForCreationDto artwork, bool trackChanges)
+        public async Task<ArtworkDto> CreateForAuthorAsync(Guid authorId, ArtworkForCreationDto artwork, bool trackChanges)
         {
-            var author = _repository.Author.Get(authorId, trackChanges);
+            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
 
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
 
-            var artworkInDb = _repository.Artwork.GetByName(artwork.ArtworkName, false);
-
-            if (artworkInDb is not null)
-                throw new ArtworkAlreadyExistsException(artwork.ArtworkName);
-
-            string path = Path.Combine(author.StoragePath, artwork.Image.FileName);
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await artwork.Image.CopyToAsync(stream);
-            }
-
-            var pathForDatabase = Path.Combine(_configuration.GetSection("LocalImageStorageName").Value!, author.Name, artwork.Image.FileName);
-
             var artworkEntity = _mapper.Map<Artwork>(artwork);
 
-            artworkEntity.ImagePath = pathForDatabase;
-            artworkEntity.ImageFileName = artwork.Image.FileName;
-
             _repository.Artwork.CreateNewForAuthor(authorId,artworkEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             var artworkToReturn = _mapper.Map<ArtworkDto>(artworkEntity);
 
             return artworkToReturn;
         }
 
-        public void Delete(Guid authorId, Guid artworkId, bool trackChanges)
+        public async Task DeleteAsync(Guid authorId, Guid artworkId, bool trackChanges)
         {
-            var author = _repository.Author.Get(authorId, trackChanges);
+            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
             if  (author is null)
             {
                 throw new AuthorNotFoundException(authorId);
             }
 
-            var artwork = _repository.Artwork.Get(artworkId, trackChanges);
+            var artwork = await _repository.Artwork.GetByIdAsync(artworkId, trackChanges);
 
             if (artwork is null)
             {
                 throw new ArtworkNotFoundException(artworkId);
             }
 
-            var path = Path.Combine(author.StoragePath, artwork.ImageFileName);
+            var path = Path.Combine(artwork.ImageUrl);
             var localImageCopy = new FileInfo(path);
 
             if (localImageCopy.Exists)
@@ -112,7 +96,7 @@ namespace Artify.Services
             }
 
             _repository.Artwork.Delete(artwork);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
     }
 }

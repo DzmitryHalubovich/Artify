@@ -4,9 +4,8 @@ namespace Artify.Repositories.Contracts
 {
     public interface IAuthorRepository
     {
-        IEnumerable<Author> GetAllAuthors(bool trackChanges);
-        Author Get(Guid authorId, bool trackChanges);
-        Author GetByName(string authorName);
+        Task<IEnumerable<Author>> GetAllAuthorsAsync(bool trackChanges);
+        Task<Author> GetByIdAsync(Guid authorId, bool trackChanges);
         void Delete(Author author);
         void Create(Author author);
     }
