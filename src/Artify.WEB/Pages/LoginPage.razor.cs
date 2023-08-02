@@ -4,7 +4,7 @@ namespace Artify.WEB.Pages
 {
     public partial class LoginPage
     {
-        private UserForAuthentication _user = new UserForAuthentication();
+        private UserForAuthenticationDto _user = new UserForAuthenticationDto();
 
         private async Task Login()
         {

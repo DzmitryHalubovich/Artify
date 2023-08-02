@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Artify.Presentation.Controllers
 {
-    [Route("api/authentication")]
+    [Route("api/auth")]
     [ApiController]
 
     public class AuthenticationController : ControllerBase
@@ -17,7 +17,7 @@ namespace Artify.Presentation.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("registration")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto
             userForRegistrationDto)
