@@ -40,12 +40,10 @@ namespace Artify.Presentation.Controllers
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
             if (!await _service.AuthenticationService.ValidateUser(user))
-                return Unauthorized();
+                return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
 
-            return Ok(new
-            {
-                Token = await _service
-            .AuthenticationService.CreateToken()
+            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = await _service
+                .AuthenticationService.CreateToken()
             });
         }
     }
