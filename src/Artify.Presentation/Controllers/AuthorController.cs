@@ -1,6 +1,7 @@
 ﻿using Artify.API.Filters;
 using Artify.Entities.DTO;
 using Artify.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Artify.Presentation.Controllers
@@ -13,6 +14,7 @@ namespace Artify.Presentation.Controllers
         public AuthorController(IServiceManager service) => _service = service;
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAuthors()
         {
             var authors = await _service.AuthorService.GetAllAsync(trackChanges:false);

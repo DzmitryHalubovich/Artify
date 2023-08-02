@@ -38,6 +38,10 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddAuthentication();
+    builder.Services.ConfigureIdentity();
+    builder.Services.ConfigureJWT(builder.Configuration);
+
 
     var app = builder.Build();
 
@@ -74,6 +78,7 @@ try
         ForwardedHeaders = ForwardedHeaders.All
     });
     app.UseCors("CorsPolicy");
+    app.UseAuthentication();
     app.UseAuthorization();
     app.MapControllers();
     app.Run();
