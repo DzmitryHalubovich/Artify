@@ -14,7 +14,7 @@ namespace Artify.Repository.Repositories
 
 
         public async Task<Author> GetByIdAsync(Guid authorId, bool trackChanges) => 
-            await FindByCondition(a => a.Id.Equals(authorId), trackChanges)
+            await FindByCondition(a => a.Id.Equals(authorId.ToString()), trackChanges)
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Author>> GetAllAuthorsAsync(bool trackChanges) => 

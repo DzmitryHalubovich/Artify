@@ -51,8 +51,8 @@ namespace Artify.API.Extensions
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
-                o.Password.RequiredLength = 10;
-                o.User.RequireUniqueEmail = true;
+                o.Password.RequiredLength = 4;
+                o.User.RequireUniqueEmail = false;
             })
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();

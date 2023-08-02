@@ -15,15 +15,17 @@ namespace Artify.Services
     {
         private readonly IMapper _mapper;
         private readonly UserManager<Author> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private Author? _user;
 
         public AuthenticationService(IMapper mapper, UserManager<Author> userManager, 
-            IConfiguration configuration)
+            IConfiguration configuration, RoleManager<IdentityRole> roleManager)
         {
             _mapper=mapper;
             _userManager=userManager;
             _configuration=configuration;
+            _roleManager=roleManager;
         }
 
         public async Task<string> CreateToken()
@@ -35,6 +37,11 @@ namespace Artify.Services
 
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
         {
+            
+            var authorRole = await _roleManager.FindByNameAsync("Author");
+
+            userForRegistration.Roles!.Add(authorRole.Name);
+
             var user = _mapper.Map<Author>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user,
