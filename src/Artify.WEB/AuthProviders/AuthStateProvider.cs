@@ -39,5 +39,6 @@ namespace Artify.WEB.AuthProviders
             var authState = Task.FromResult(_anonymous);
             NotifyAuthenticationStateChanged(authState);
         }
+
     }
 }

@@ -71,7 +71,9 @@ userForAuth.Password));
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName)
+                new Claim("AuthorId", _user.Id),
+                new Claim("PublicName", _user.Name),
+                new Claim("UserName", _user.UserName)
             };
             var roles = await _userManager.GetRolesAsync(_user);
             foreach (var role in roles)
