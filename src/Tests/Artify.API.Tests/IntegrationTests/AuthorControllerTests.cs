@@ -101,21 +101,18 @@ namespace Artify.API.Tests.IntegrationTests
             {
                 new Author
                 {
-                    Id = new Guid("195E720F-9927-4031-9979-163F4BAC1ECB"),
-                    Name = "Thomas Anderson",
-                    StoragePath = "TestPath/Thomas Anderson"
+                    Id = "195E720F-9927-4031-9979-163F4BAC1ECB",
+                    UserName = "Thomas Anderson",
                 },
                 new Author
                 {
-                    Id = new Guid("4ADD71A9-16DC-4F70-81D8-59EC711AA05F"),
-                    Name = "Heisenberg",
-                    StoragePath = "TestPath/Heisenberg"
+                    Id = "4ADD71A9-16DC-4F70-81D8-59EC711AA05F",
+                    UserName = "Jonhy",
                 },
                 new Author
                 {
-                    Id = new Guid("3733AC7A-88F1-4386-8E63-8CF31F8E2F01"),
-                    Name = "Heisenberg",
-                    StoragePath = "TestPath/Heisenberg"
+                    Id = "3733AC7A-88F1-4386-8E63-8CF31F8E2F01",
+                    UserName = "Heisenberg",
                 }
             };
 
@@ -176,21 +173,18 @@ namespace Artify.API.Tests.IntegrationTests
             {
                 new Author
                 {
-                    Id = new Guid("195E720F-9927-4031-9979-163F4BAC1ECB"),
-                    Name = "Thomas Anderson",
-                    StoragePath = "TestPath/Thomas Anderson"
+                    Id = "195E720F-9927-4031-9979-163F4BAC1ECB",
+                    UserName = "Thomas Anderson",
                 },
                 new Author
                 {
-                    Id = new Guid("4ADD71A9-16DC-4F70-81D8-59EC711AA05F"),
-                    Name = "Heisenberg",
-                    StoragePath = "TestPath/Heisenberg"
+                    Id = "4ADD71A9-16DC-4F70-81D8-59EC711AA05F",
+                    UserName = "Heisenberg",
                 },
                 new Author
                 {
-                    Id = new Guid("3733AC7A-88F1-4386-8E63-8CF31F8E2F01"),
-                    Name = "Heisenberg",
-                    StoragePath = "TestPath/Heisenberg"
+                    Id = "3733AC7A-88F1-4386-8E63-8CF31F8E2F01",
+                    UserName = "Heisenberg",
                 }
             };
 
@@ -222,7 +216,7 @@ namespace Artify.API.Tests.IntegrationTests
 
             //Assert
             Assert.Equal(2,context.Authors.Count());
-            Assert.Equal(null,context.Authors.FirstOrDefault(x=>x.Id == new Guid("3733AC7A-88F1-4386-8E63-8CF31F8E2F01")));
+            Assert.Equal(null,context.Authors.FirstOrDefault(x=>x.Id == "3733AC7A-88F1-4386-8E63-8CF31F8E2F01"));
 
             appFactory.Dispose();
             httpClient.Dispose();

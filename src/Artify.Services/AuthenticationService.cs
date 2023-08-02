@@ -14,11 +14,11 @@ namespace Artify.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<Author> _userManager;
         private readonly IConfiguration _configuration;
-        private User? _user;
+        private Author? _user;
 
-        public AuthenticationService(IMapper mapper, UserManager<User> userManager, 
+        public AuthenticationService(IMapper mapper, UserManager<Author> userManager, 
             IConfiguration configuration)
         {
             _mapper=mapper;
@@ -35,7 +35,7 @@ namespace Artify.Services
 
         public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
         {
-            var user = _mapper.Map<User>(userForRegistration);
+            var user = _mapper.Map<Author>(userForRegistration);
 
             var result = await _userManager.CreateAsync(user,
             userForRegistration.Password);

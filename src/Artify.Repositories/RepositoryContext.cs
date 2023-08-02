@@ -6,7 +6,7 @@ using System.Reflection.Emit;
 
 namespace Artify.Repository
 {
-    public class RepositoryContext : IdentityDbContext<User>
+    public class RepositoryContext : IdentityDbContext<Author>
     {
         public RepositoryContext(DbContextOptions options) : base(options) { }
 

@@ -14,7 +14,7 @@ namespace Artify.Services
         private readonly Lazy<IAuthenticationService> _authenticationService;
         public ServiceManager(IRepositoryManager repositoryManager, 
             IMapper mapper,
-            UserManager<User> userManager,
+            UserManager<Author> userManager,
             IConfiguration configuration)
         {
             _artworkService = new Lazy<IArtworkService>(() =>

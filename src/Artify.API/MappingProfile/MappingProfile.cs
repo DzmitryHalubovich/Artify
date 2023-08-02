@@ -8,7 +8,7 @@ namespace Artify.API.MappingProfile
     {
         public MappingProfile()
         {
-            CreateMap<UserForRegistrationDto, User>();
+            CreateMap<UserForRegistrationDto, Author>();
 
             CreateMap<Author, AuthorDto>();
             CreateMap<AuthorDto, Author>();
