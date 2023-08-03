@@ -1,15 +1,10 @@
 ﻿@page "/artworks/create"
+@attribute [Authorize]
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<h2 style="color:#fff">Create new artwork</h2>
-
+<h2>Create new artwork</h2>
 <EditForm Model="_artwork" OnValidSubmit="Create" class="card card-body bg-light mt-5">
-    <div class="form-group row">
-        <label for="AurhorId" class="col-md-2 col-form-label">AuthorId:</label>
-        <div class="col-md-10">
-            <input id="authorId" name="AurhorId" class="form-control" @bind="_artwork.AuthorId" />
-        </div>
-    </div>
-
+            
     <div class="form-group row">
         <label for="name" class="col-md-2 col-form-label">Title:</label>
         <div class="col-md-10">
@@ -38,3 +33,6 @@
     </div>
 </EditForm>
 <SuccessNotification @ref="_notification" />
+
+
+

@@ -5,7 +5,6 @@ namespace Artify.Entities.Models
 {
     public class Artwork
     {
-
         public Guid AuthorId { get; set; }
         public string Title { get; set; } = default!;
 

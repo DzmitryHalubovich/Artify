@@ -1,5 +1,7 @@
 ﻿using Artify.Entities.Models;
+using Artify.WEB.AuthProviders;
 using Artify.WEB.Models;
+using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -10,17 +12,18 @@ namespace Artify.WEB.Services
     {
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
+        private readonly AuthenticationState _anonymous;
         public ArtworkService(HttpClient client)
         {
             _client = client;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+           
         }
 
         public async Task CreateArtwork(Artwork artwork)
         {
             var content = JsonSerializer.Serialize(artwork);
             var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-
             var postResult = await _client.PostAsync($"api/authors/{artwork.AuthorId}/artworks", bodyContent);
             var postContent = await postResult.Content.ReadAsStringAsync();
 

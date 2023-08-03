@@ -1,17 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Artify.Entities.Models
 {
-    public class Author
+    public class Author : IdentityUser
     {
-        [Column("AuthorId")]
-        public Guid Id { get; set; }
-
-        [Required(ErrorMessage = "Author name is a required field.")]
         public string Name { get; set; }
-        public required string StoragePath { get; set; }
-
         public ICollection<Artwork>? Artworks { get; set; }
     }
 }

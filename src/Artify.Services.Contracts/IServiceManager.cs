@@ -4,5 +4,7 @@
     {
         IArtworkService ArtworkService { get; }
         IAuthorService AuthorService { get; }
+        IAuthenticationService AuthenticationService { get; }
+
     }
 }

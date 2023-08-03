@@ -1,6 +1,8 @@
-﻿using Artify.Repositories.Contracts;
+﻿using Artify.Entities.Models;
+using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
 namespace Artify.Services
@@ -9,16 +11,25 @@ namespace Artify.Services
     {
         private readonly Lazy<IArtworkService> _artworkService;
         private readonly Lazy<IAuthorService> _authorService;
-
-        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper, IConfiguration configuration)
+        private readonly Lazy<IAuthenticationService> _authenticationService;
+        public ServiceManager(IRepositoryManager repositoryManager, 
+            IMapper mapper,
+            UserManager<Author> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IConfiguration configuration)
         {
-            _artworkService = new Lazy<IArtworkService>(() => 
+            _artworkService = new Lazy<IArtworkService>(() =>
                     new ArtworkService(repositoryManager, mapper, configuration));
-            _authorService = new Lazy<IAuthorService>(() => 
+            _authorService = new Lazy<IAuthorService>(() =>
                     new AuthorService(repositoryManager, mapper, configuration));
+            _authenticationService = new Lazy<IAuthenticationService>(() =>
+                    new AuthenticationService(mapper, userManager, configuration, roleManager));
         }
         public IArtworkService ArtworkService => _artworkService.Value;
 
         public IAuthorService AuthorService => _authorService.Value;
+
+        public IAuthenticationService AuthenticationService => _authenticationService.Value;
+
     }
 }

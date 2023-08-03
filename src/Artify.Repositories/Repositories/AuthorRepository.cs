@@ -14,16 +14,16 @@ namespace Artify.Repository.Repositories
 
 
         public async Task<Author> GetByIdAsync(Guid authorId, bool trackChanges) => 
-            await FindByCondition(a => a.Id.Equals(authorId), trackChanges)
+            await FindByCondition(a => a.Id.Equals(authorId.ToString()), trackChanges)
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Author>> GetAllAuthorsAsync(bool trackChanges) => 
             await FindAll(trackChanges)
-                .OrderBy(c=>c.Name)
+                .OrderBy(c=>c.UserName)
                 .ToListAsync();
 
         public async Task<Author> GetByName(string authorName) => 
-            await FindByCondition(a => a.Name.Equals(authorName), false)
+            await FindByCondition(a => a.UserName.Equals(authorName), false)
                 .SingleOrDefaultAsync();
 
     }

@@ -23,10 +23,6 @@ namespace Artify.Services
         public  async Task<AuthorDto> CreateAsync(AuthorForCreationDto author)
          {
             var authorForDb = _mapper.Map<Author>(author);
-            
-           var authorStoragePath = CreateAuthorFoulderIfNotExistsAsync(author);
-
-            authorForDb.StoragePath = authorStoragePath;
 
             _repository.Author.Create(authorForDb);
            await _repository.SaveAsync();
@@ -55,11 +51,6 @@ namespace Artify.Services
             var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
             if (author is null)
                 throw new AuthorNotFoundException(authorId);
-
-            var authorLocalStorage = new DirectoryInfo(author.StoragePath);
-
-            if (authorLocalStorage.Exists)
-                authorLocalStorage.Delete(true);
 
             _repository.Author.Delete(author);
             await _repository.SaveAsync();

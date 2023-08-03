@@ -20,6 +20,5 @@ namespace Artify.WEB.Pages
                 Console.WriteLine(artworkDto);
             }
         }
-
     }
 }
