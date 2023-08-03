@@ -42,8 +42,12 @@ namespace Artify.Presentation.Controllers
             if (!await _service.AuthenticationService.ValidateUser(user))
                 return Unauthorized(new AuthResponseDto { ErrorMessage = "Invalid Authentication" });
 
-            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = await _service
-                .AuthenticationService.CreateToken()
+            var tokenDto = await _service.AuthenticationService
+                .CreateToken(populateExp: true);
+
+            return Ok(new AuthResponseDto { IsAuthSuccessful = true, 
+                Token = tokenDto.Token, 
+                RefreshToken = tokenDto.RefreshToken 
             });
         }
     }

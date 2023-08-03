@@ -8,16 +8,20 @@ using System.Net.Http;
 
 namespace Artify.WEB.Pages
 {
-    public partial class ArtworkCreate
+    public partial class ArtworkCreate : IDisposable
     {
         private Artwork _artwork = new Artwork();
         private SuccessNotification _notification;
 
         [Inject]
         public IArtworkService ArtworkService { get; set; }
+        [Inject]
+        public HttpInterceptorService Interceptor { get; set; }
 
         private async Task Create()
         {
+            Interceptor.RegisterEvent();
+
             var authState = await AuthenticationStateProvider
            .GetAuthenticationStateAsync();
             var user = authState.User;
@@ -27,5 +31,7 @@ namespace Artify.WEB.Pages
         }
 
         private void AssignImageUrl(string imgUrl) => _artwork.ImageUrl = imgUrl;
+
+        public void Dispose() => Interceptor.DisposeEvent();
     }
 }
