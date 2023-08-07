@@ -1,11 +1,16 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+:root{
+    --bs-nav-link-padding-y: 0.5rem;
+    --bs-nav-link-padding-x: 1rem;
+}
+
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 main {
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
 }
 
 h1:focus {
