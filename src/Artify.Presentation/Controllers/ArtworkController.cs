@@ -1,5 +1,5 @@
 ﻿using Artify.API.Filters;
-using Artify.Entities.DTO;
+using Artify.Entities.DTO.Artwork;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +29,14 @@ namespace Artify.Presentation.Controllers
             return Ok(artworks);
         }
 
+        [HttpGet("{authorId}/artworks")]
+        public async Task<IActionResult> GetArtworksForAuthor(Guid authorId)
+        {
+            var artworks = await _service.ArtworkService.GetAllForAuthorAsync(authorId, false);
+
+            return Ok(artworks);
+        }
+
         [HttpGet("artworks/{artworkId:guid}", Name = "ArtworkById")]
         public async Task<IActionResult> GetArtwork(Guid artworkId)
         {
@@ -44,7 +52,7 @@ namespace Artify.Presentation.Controllers
             var createdArtwork =
                 await _service.ArtworkService.CreateForAuthorAsync(authorId, artwork, trackChanges: false);
 
-            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id },
+            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.ArtworkId },
                 createdArtwork);
         }
 

@@ -6,7 +6,10 @@ namespace Artify.Entities.Models
     public class Artwork
     {
         [Column("ArtworkId")]
-        public Guid Id { get; set; }
+        public Guid ArtworkId { get; set; }
+        public string AuthorId { get; set; }
+        [ForeignKey(nameof(AuthorId))]
+        public Author Author { get; set; }
 
         [Required(ErrorMessage = "Artwork title is a required field.")]
         [MaxLength(100, ErrorMessage = "Maximum length for the Title is 100 characters.")]

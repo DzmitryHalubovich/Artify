@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace Artify.Services.Contracts

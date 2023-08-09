@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Artwork;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;
@@ -45,7 +45,7 @@ context, Encoding selectedEncoding)
 
         private static void FormatCsv(StringBuilder buffer, ArtworkDto artwork)
         {
-            buffer.AppendLine($"{artwork.Id},\"{artwork.Title},\"{artwork.Description}\"{artwork.ImageUrl}\"");
+            buffer.AppendLine($"{artwork.ArtworkId},\"{artwork.Title},\"{artwork.Description}\"{artwork.ImageUrl}\"");
         }
     }
 }

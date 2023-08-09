@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
-namespace Artify.Entities.DTO
+namespace Artify.Entities.DTO.Artwork
 {
     public record ArtworkForCreationDto
     {

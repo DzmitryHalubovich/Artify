@@ -1,0 +1,9 @@
+﻿@page "/authors/{authorId:guid}"
+@attribute [Authorize]
+
+
+<div style="justify-content:center; display:flex;">
+    <h2>@Author.Name collection</h2>
+</div>
+<ArtworkTable Artworks="ArtworksList" />
+

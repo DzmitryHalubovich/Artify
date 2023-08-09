@@ -1,16 +1,14 @@
-﻿using Artify.Entities.Models;
-using Artify.WEB.AuthProviders;
+﻿using Artify.WEB.Models;
 using Artify.WEB.Services;
 using Artify.WEB.Shared;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http;
 
 namespace Artify.WEB.Pages
 {
     public partial class ArtworkCreate : IDisposable
     {
-        private Artwork _artwork = new Artwork();
+        private ArtworkCreateModel _artwork = new ArtworkCreateModel();
+
         private SuccessNotification _notification;
 
         [Inject]
@@ -22,10 +20,6 @@ namespace Artify.WEB.Pages
         {
             Interceptor.RegisterEvent();
 
-            var authState = await AuthenticationStateProvider
-           .GetAuthenticationStateAsync();
-            var user = authState.User;
-            _artwork.AuthorId = new Guid(user.FindFirst("AuthorId").Value);
             await ArtworkService.CreateArtwork(_artwork);
             _notification.Show();
         }

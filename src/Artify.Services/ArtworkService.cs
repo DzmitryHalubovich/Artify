@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Artwork;
 using Artify.Entities.Exceptions;
 using Artify.Entities.Models;
 using Artify.Repositories.Contracts;

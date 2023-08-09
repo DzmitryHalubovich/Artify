@@ -1,5 +1,6 @@
 ﻿using Artify.WEB.Models;
 using Artify.WEB.Services;
+using Artify.WEB.Shared;
 using Microsoft.AspNetCore.Components;
 
 namespace Artify.WEB.Pages
@@ -13,6 +14,8 @@ namespace Artify.WEB.Pages
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+
+        private SuccessNotification _notification;
         public bool ShowRegistrationErrors { get; set; }
         public IEnumerable<string> Errors { get; set; }
 
@@ -29,6 +32,7 @@ namespace Artify.WEB.Pages
             else
             {
                 NavigationManager.NavigateTo("/");
+                _notification.Show();
             }
         }
     }

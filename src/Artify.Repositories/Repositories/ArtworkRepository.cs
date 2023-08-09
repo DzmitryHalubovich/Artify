@@ -11,20 +11,23 @@ namespace Artify.Repository.Repositories
 
         public async Task<IEnumerable<Artwork>> GetAllAsync(bool trackChanges) => 
             await FindAll(trackChanges)
-            .OrderBy(x => x.Id)
+            .Include(x=>x.Author)
+            .OrderBy(x => x.ArtworkId)
             .ToListAsync();
 
         public async Task<Artwork> GetByIdAsync(Guid artworkId, bool trackChanges) =>
-            await FindByCondition(a => a.Id.Equals(artworkId), trackChanges)
+            await FindByCondition(a => a.ArtworkId.Equals(artworkId), trackChanges)
+                .Include(x=>x.Author)
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Artwork>> GetAllForAuthorAsync(Guid authorId, bool trackChanges) =>
-           await FindByCondition(a => a.Id.Equals(authorId), trackChanges: false)
-                .OrderBy(x => x.Id)
+           await FindByCondition(a => a.AuthorId.Equals(authorId.ToString()), trackChanges: false)
+                .OrderByDescending(x => x.ArtworkId)
                 .ToListAsync();
 
         public void CreateNewForAuthor(Guid authorId, Artwork artwork)
         {
+            artwork.AuthorId = authorId.ToString();
             CreateEntity(artwork);
         }
 

@@ -1,0 +1,8 @@
+﻿@page "/personal_collection"
+@attribute [Authorize]
+
+<div style="justify-content:center; display:flex;">
+    <h2>@Author.Name personal collection</h2>
+</div>
+
+<ArtworkTable Artworks="ArtworksList" />
