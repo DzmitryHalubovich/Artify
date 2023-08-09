@@ -12,19 +12,24 @@ namespace Artify.WEB.Services
     {
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
-        private readonly AuthenticationState _anonymous;
-        public ArtworkService(HttpClient client)
+        private readonly AuthenticationStateProvider _authProvider;
+        //New
+
+        public ArtworkService(HttpClient client, AuthenticationStateProvider authProvider)
         {
             _client = client;
             _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-           
+            _authProvider=authProvider;
         }
 
-        public async Task CreateArtwork(Artwork artwork)
+        public async Task CreateArtwork(ArtworkCreateModel artwork)
         {
+            var authState = await _authProvider.GetAuthenticationStateAsync();
+            var userId = authState.User.FindFirst("AuthorId").Value;
+
             var content = JsonSerializer.Serialize(artwork);
             var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-            var postResult = await _client.PostAsync($"api/authors/{artwork.AuthorId}/artworks", bodyContent);
+            var postResult = await _client.PostAsync($"api/authors/{userId}/artworks", bodyContent);
             var postContent = await postResult.Content.ReadAsStringAsync();
 
             if (!postResult.IsSuccessStatusCode)

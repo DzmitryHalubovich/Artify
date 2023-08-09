@@ -1,6 +1,5 @@
 ﻿@page "/artworks/create"
 @attribute [Authorize]
-@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <h2>Create new artwork</h2>
 <EditForm Model="_artwork" OnValidSubmit="Create" class="card card-body bg-light mt-5" style="color:black">
