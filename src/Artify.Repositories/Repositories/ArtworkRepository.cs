@@ -21,7 +21,7 @@ namespace Artify.Repository.Repositories
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Artwork>> GetAllForAuthorAsync(Guid authorId, bool trackChanges) =>
-           await FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
+           await FindByCondition(a => a.AuthorId.Equals(authorId.ToString()), trackChanges: false)
                 .OrderByDescending(x => x.ArtworkId)
                 .ToListAsync();
 

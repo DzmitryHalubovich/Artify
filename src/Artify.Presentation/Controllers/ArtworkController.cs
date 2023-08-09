@@ -29,6 +29,14 @@ namespace Artify.Presentation.Controllers
             return Ok(artworks);
         }
 
+        [HttpGet("{authorId}/artworks")]
+        public async Task<IActionResult> GetArtworksForAuthor(Guid authorId)
+        {
+            var artworks = await _service.ArtworkService.GetAllForAuthorAsync(authorId, false);
+
+            return Ok(artworks);
+        }
+
         [HttpGet("artworks/{artworkId:guid}", Name = "ArtworkById")]
         public async Task<IActionResult> GetArtwork(Guid artworkId)
         {

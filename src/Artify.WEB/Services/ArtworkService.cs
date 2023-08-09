@@ -1,5 +1,4 @@
-﻿using Artify.WEB.AuthProviders;
-using Artify.WEB.Models;
+﻿using Artify.WEB.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
 using System.Text;
@@ -53,6 +52,25 @@ namespace Artify.WEB.Services
 
             var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
             return artworks;
+        }
+
+        public async Task<IEnumerable<ArtworkModel>> GetArtworksForAuthor(Guid authorId)
+        {
+            var response = await _client.GetAsync($"api/{authorId}/artworks");
+            var content = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
+
+            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
+            return artworks;
+        }
+        public async Task<AuthorModel> GetAuthor(Guid authorId)
+        {
+            var author = await _client.GetFromJsonAsync<AuthorModel>($"/api/authors/{authorId}");
+            return author;
         }
 
         public async Task<string> UploadProductImage(MultipartFormDataContent content)
