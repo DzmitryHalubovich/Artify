@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Artwork;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Net.Http.Headers;
 using System.Text;

@@ -1,4 +1,4 @@
-﻿namespace Artify.Entities.DTO
+﻿namespace Artify.Entities.DTO.Authorization
 {
     public class AuthResponseDto
     {

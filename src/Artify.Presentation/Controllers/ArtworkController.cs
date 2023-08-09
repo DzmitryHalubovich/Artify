@@ -1,5 +1,5 @@
 ﻿using Artify.API.Filters;
-using Artify.Entities.DTO;
+using Artify.Entities.DTO.Artwork;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

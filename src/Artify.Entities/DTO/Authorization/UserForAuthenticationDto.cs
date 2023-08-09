@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Artify.Entities.DTO
+namespace Artify.Entities.DTO.Authorization
 {
     public record UserForAuthenticationDto
     {

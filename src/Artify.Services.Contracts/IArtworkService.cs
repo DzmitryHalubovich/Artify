@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Artwork;
 
 namespace Artify.Services.Contracts
 {

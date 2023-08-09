@@ -1,9 +1,10 @@
 ﻿using Artify.API.Filters;
 using Artify.Entities.DTO;
+using Artify.Entities.DTO.Authorization;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Artify.Presentation.Controllers
+namespace Artify.Presentation.Controllers.Authorization
 {
     [Route("api/auth")]
     [ApiController]
@@ -45,9 +46,11 @@ namespace Artify.Presentation.Controllers
             var tokenDto = await _service.AuthenticationService
                 .CreateToken(populateExp: true);
 
-            return Ok(new AuthResponseDto { IsAuthSuccessful = true, 
-                Token = tokenDto.Token, 
-                RefreshToken = tokenDto.RefreshToken 
+            return Ok(new AuthResponseDto
+            {
+                IsAuthSuccessful = true,
+                Token = tokenDto.Token,
+                RefreshToken = tokenDto.RefreshToken
             });
         }
     }

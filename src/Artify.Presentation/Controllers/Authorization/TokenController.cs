@@ -1,9 +1,9 @@
 ﻿using Artify.API.Filters;
-using Artify.Entities.DTO;
+using Artify.Entities.DTO.Authorization;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Artify.Presentation.Controllers
+namespace Artify.Presentation.Controllers.Authorization
 {
     [Route("api/token")]
     [ApiController]
@@ -13,7 +13,7 @@ namespace Artify.Presentation.Controllers
 
         public TokenController(IServiceManager service)
         {
-            _service=service;
+            _service = service;
         }
 
         [HttpPost("refresh")]

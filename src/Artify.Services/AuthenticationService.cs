@@ -1,4 +1,4 @@
-﻿using Artify.Entities.DTO;
+﻿using Artify.Entities.DTO.Authorization;
 using Artify.Entities.Exceptions;
 using Artify.Entities.Models;
 using Artify.Services.Contracts;
@@ -61,6 +61,8 @@ namespace Artify.Services
 
             if (result.Succeeded)
                 await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
+
+            _user = await _userManager.FindByNameAsync(userForRegistration.UserName);
 
             return result;        }
 
