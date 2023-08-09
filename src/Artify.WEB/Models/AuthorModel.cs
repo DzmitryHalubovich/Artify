@@ -1,6 +1,6 @@
-﻿namespace Artify.Entities.DTO
+﻿namespace Artify.WEB.Models
 {
-    public class AuthorDto
+    public class AuthorModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

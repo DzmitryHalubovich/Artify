@@ -44,7 +44,7 @@ namespace Artify.Presentation.Controllers
             var createdArtwork =
                 await _service.ArtworkService.CreateForAuthorAsync(authorId, artwork, trackChanges: false);
 
-            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.Id },
+            return CreatedAtRoute("ArtworkById", new { artworkId = createdArtwork.ArtworkId },
                 createdArtwork);
         }
 

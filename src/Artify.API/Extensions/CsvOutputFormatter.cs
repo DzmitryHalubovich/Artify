@@ -45,7 +45,7 @@ context, Encoding selectedEncoding)
 
         private static void FormatCsv(StringBuilder buffer, ArtworkDto artwork)
         {
-            buffer.AppendLine($"{artwork.Id},\"{artwork.Title},\"{artwork.Description}\"{artwork.ImageUrl}\"");
+            buffer.AppendLine($"{artwork.ArtworkId},\"{artwork.Title},\"{artwork.Description}\"{artwork.ImageUrl}\"");
         }
     }
 }

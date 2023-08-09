@@ -7,7 +7,7 @@ namespace Artify.WEB.Pages
     public partial class ArtworkDetails
     {
         [Parameter]
-        public Guid Id { get; set; }
+        public Guid ArtworkId { get; set; }
 
         public ArtworkModel artwork = new ArtworkModel();
 
@@ -16,7 +16,7 @@ namespace Artify.WEB.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            artwork = await ArtworkService.GetArtwork(Id);
+            artwork = await ArtworkService.GetArtwork(ArtworkId);
         }
     }
 }

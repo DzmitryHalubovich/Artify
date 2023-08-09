@@ -146,7 +146,6 @@ namespace Artify.API.Tests.IntegrationTests
             Assert.NotNull(response);
             Assert.Equal(new Guid("3733AC7A-88F1-4386-8E63-8CF31F8E2F01"), response.Id);
             Assert.Equal("Heisenberg", response.Name);
-            Assert.Equal("TestPath/Heisenberg", response.StoragePath);
 
             appFactory.Dispose();
             httpClient.Dispose();
