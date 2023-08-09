@@ -1,5 +1,4 @@
-﻿using Artify.Entities.Models;
-using Artify.WEB.AuthProviders;
+﻿using Artify.WEB.AuthProviders;
 using Artify.WEB.Models;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
@@ -25,11 +24,9 @@ namespace Artify.WEB.Services
         public async Task CreateArtwork(ArtworkCreateModel artwork)
         {
             var authState = await _authProvider.GetAuthenticationStateAsync();
-            var userId = authState.User.FindFirst("AuthorId").Value;
+            var userId = authState.User.FindFirst("AuthorId")!.Value;
 
-            var content = JsonSerializer.Serialize(artwork);
-            var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-            var postResult = await _client.PostAsync($"api/authors/{userId}/artworks", bodyContent);
+            var postResult = await _client.PostAsJsonAsync($"api/authors/{userId}/artworks", artwork);
             var postContent = await postResult.Content.ReadAsStringAsync();
 
             if (!postResult.IsSuccessStatusCode)
@@ -38,13 +35,13 @@ namespace Artify.WEB.Services
             }
         }
 
-        public async Task<ArtworkDto> GetArtwork(Guid artworkId)
+        public async Task<ArtworkModel> GetArtwork(Guid artworkId)
         {
-            var product = await _client.GetFromJsonAsync<ArtworkDto>($"/api/artworks/{artworkId}");
+            var product = await _client.GetFromJsonAsync<ArtworkModel>($"/api/artworks/{artworkId}");
             return product;
         }
 
-        public async Task<IEnumerable<ArtworkDto>> GetArtworks()
+        public async Task<IEnumerable<ArtworkModel>> GetArtworks()
         {
             var response = await _client.GetAsync("api/artworks");
             var content = await response.Content.ReadAsStringAsync();
@@ -54,7 +51,7 @@ namespace Artify.WEB.Services
                 throw new ApplicationException(content);
             }
 
-            var artworks = JsonSerializer.Deserialize<List<ArtworkDto>>(content, _options);
+            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
             return artworks;
         }
 

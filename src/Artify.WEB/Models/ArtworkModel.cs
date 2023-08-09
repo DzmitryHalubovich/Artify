@@ -1,8 +1,8 @@
 ﻿namespace Artify.WEB.Models
 {
-    public class ArtworkDto
+    public class ArtworkModel
     {
-        public Guid Id { get; set; }
+        public Guid ArtworkId { get; set; }
         public string Title { get; set; } = default!;
 
         public string? Description { get; set; }

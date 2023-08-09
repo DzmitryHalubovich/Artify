@@ -12,7 +12,7 @@ namespace Artify.WEB.Pages
         [Inject]
         public HttpInterceptorService Interceptor { get; set; }
 
-        public IEnumerable<ArtworkDto> ArtworksList { get; set; } = new List<ArtworkDto>();
+        public IEnumerable<ArtworkModel> ArtworksList { get; set; } = new List<ArtworkModel>();
 
         protected override async Task OnInitializedAsync()
         {
