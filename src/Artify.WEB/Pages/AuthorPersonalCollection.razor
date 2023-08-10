@@ -5,4 +5,34 @@
     <h2>@Author.Name personal collection</h2>
 </div>
 
-<ArtworkTable Artworks="ArtworksList" />
+
+<div class="container">
+    @foreach (var artwork in ArtworksList)
+     {
+        <div class="row align-items-start" style="margin:10px; background-color: #292826">
+                <div class="col-3" style="">
+                    <img class="rounded mx-auto d-block" style="width:220px;" src="@artwork.ImageUrl" />
+                </div>
+                <div class="col">
+                    <h4><span style="font-weight:900">Title:</span> @artwork.Title</h4>
+                @if (artwork.Description != null)
+                {
+                    <h4><span style="font-weight:900">Description:</span></h4> 
+                    <p>
+                        @artwork.Description
+                    </p>
+                }
+                </div>
+                <div class="col">
+                    <div >
+                    <button class="btn btn-primary">Edit artwork</button>
+                    </div>
+                    <div style ="margin-top:10px;">
+                        <button class="btn btn-danger">Delete artwork</button>
+                    </div>
+                </div>
+          </div>
+     }
+</div>
+
+@*<ArtworkTable Artworks="ArtworksList" />*@
