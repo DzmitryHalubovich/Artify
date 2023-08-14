@@ -1,13 +1,36 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
-        <div class="top-row px-4">
-            <AuthLinks />
+        <div class="top-row bg-dark px-4">
+                <AuthLinks />
+        </div>
+        <div class="container bg-gradient">
+            <div  style="display:flex;">
+                <div style="display:flex;">
+                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                        <span class="oi oi-home" aria-hidden="true"></span> Home
+                    </NavLink>
+                </div>
+                <AuthorizeView>
+                    <Authorized>
+                        <div style="display:flex;">
+                            <NavLink class="nav-link" href="artworks/create">
+                                <span class="bi bi-bookmark-plus"></span> Create new artwork
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView>
+                    <Authorized>
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="personal_collection">
+                                <span class="bi bi-bookmark-plus"></span> My collection
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
         </div>
         <article class="content px-4">
             @Body

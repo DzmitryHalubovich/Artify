@@ -1,8 +1,8 @@
 ﻿@if (Artworks.Count() > 0){
-    <div class="row mt-3">
+    <div class="row mt-3" style="display:flex">
         @foreach (var artwork in Artworks)
         {
-            <div class="col-md-3 mb-2" style="padding: 2px;">
+            <div class="col-md-3 mb-2" style="padding: 2px; display:flex;">
                 <a href="/artworks/@artwork.ArtworkId">
                     <img class="img-thumbnail" src="@artwork.ImageUrl" >
                 </a>
