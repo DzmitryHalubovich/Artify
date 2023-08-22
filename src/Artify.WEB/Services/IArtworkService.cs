@@ -10,6 +10,7 @@ namespace Artify.WEB.Services
         Task CreateArtwork(ArtworkCreateModel product);
         Task<string> UploadProductImage(MultipartFormDataContent content);
 
+        Task DeleteArtwork(Guid authorId, Guid artworkId);
         Task<AuthorModel> GetAuthor(Guid authorId);
     }
 }

@@ -61,7 +61,7 @@ namespace Artify.API.Tests.IntegrationTests
                 });
             var httpClient = appFactory.CreateClient();
 
-            var newAuthor = new AuthorForCreationDto() { Name = "Thomas" };
+            var newAuthor = new AuthorForCreationDto() { PublicName = "Thomas" };
 
             var json = JsonSerializer.Serialize(newAuthor);
 
@@ -145,7 +145,7 @@ namespace Artify.API.Tests.IntegrationTests
             //Assert
             Assert.NotNull(response);
             Assert.Equal(new Guid("3733AC7A-88F1-4386-8E63-8CF31F8E2F01"), response.Id);
-            Assert.Equal("Heisenberg", response.Name);
+            Assert.Equal("Heisenberg", response.PublicName);
 
             appFactory.Dispose();
             httpClient.Dispose();

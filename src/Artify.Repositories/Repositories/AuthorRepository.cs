@@ -1,4 +1,5 @@
-﻿using Artify.Entities.Models;
+﻿using Artify.Entities.DTO;
+using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,6 @@ namespace Artify.Repository.Repositories
 
         public void Delete(Author author) => DeleteEntity(author);
 
-
         public async Task<Author> GetByIdAsync(Guid authorId, bool trackChanges) => 
             await FindByCondition(a => a.Id.Equals(authorId.ToString()), trackChanges)
                 .SingleOrDefaultAsync();
@@ -22,9 +22,23 @@ namespace Artify.Repository.Repositories
                 .OrderBy(c=>c.UserName)
                 .ToListAsync();
 
-        public async Task<Author> GetByName(string authorName) => 
-            await FindByCondition(a => a.UserName.Equals(authorName), false)
-                .SingleOrDefaultAsync();
+        public async Task<AuthorDto> GetShortAuthor(Guid authorId)
+        {
+            var temp = await FindByCondition(a => a.Id.Equals(authorId.ToString()), false)
+                .Select(a => new
+                {
+                    a.Id,
+                    a.PublicName
+                }).SingleOrDefaultAsync();
 
+            var author = new AuthorDto()
+            {
+                Id = new Guid(temp.Id),
+                PublicName = temp.PublicName,
+            };
+
+            return author;
+        }
     }
+
 }

@@ -1,5 +1,6 @@
 ﻿using Artify.API.Filters;
 using Artify.Entities.DTO.Artwork;
+using Artify.Presentation.ActionFilters;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,7 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpDelete("authors/{authorId:guid}/artworks/{artworkId:guid}")]
+        [ServiceFilter(typeof(AuthorExistsFilterAttribute))]
         public async Task<IActionResult> DeleteArtwork(Guid authorId, Guid artworkId)
         {
             await _service.ArtworkService.DeleteAsync(authorId, artworkId, trackChanges: false);

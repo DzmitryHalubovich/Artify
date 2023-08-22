@@ -19,9 +19,9 @@ namespace Artify.Services
             IConfiguration configuration)
         {
             _artworkService = new Lazy<IArtworkService>(() =>
-                    new ArtworkService(repositoryManager, mapper, configuration));
+                    new ArtworkService(repositoryManager, mapper));
             _authorService = new Lazy<IAuthorService>(() =>
-                    new AuthorService(repositoryManager, mapper, configuration));
+                    new AuthorService(repositoryManager, mapper));
             _authenticationService = new Lazy<IAuthenticationService>(() =>
                     new AuthenticationService(mapper, userManager, configuration, roleManager));
         }
