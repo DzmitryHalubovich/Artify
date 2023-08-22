@@ -34,6 +34,11 @@ namespace Artify.WEB.Services
             }
         }
 
+        public async Task DeleteArtwork(Guid authorId, Guid artworkId)
+        {
+            var deleteResult = await _client.DeleteAsync($"api/authors/{authorId}/artworks/{artworkId}");
+        }
+
         public async Task<ArtworkModel> GetArtwork(Guid artworkId)
         {
             var product = await _client.GetFromJsonAsync<ArtworkModel>($"/api/artworks/{artworkId}");

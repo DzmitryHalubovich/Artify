@@ -2,7 +2,7 @@
 @attribute [Authorize]
 
 <div style="justify-content:center; display:flex;">
-    <h2>@Author.Name personal collection</h2>
+    <h2>@Author.PublicName personal collection</h2>
 </div>
 
 
@@ -28,11 +28,9 @@
                     <button class="btn btn-primary">Edit artwork</button>
                     </div>
                     <div style ="margin-top:10px;">
-                        <button class="btn btn-danger">Delete artwork</button>
+                    <button @onclick="@(async () =>  await DeleteArtwork(artwork.ArtworkId))" class="btn btn-danger">Delete artwork</button>
                     </div>
                 </div>
           </div>
      }
 </div>
-
-@*<ArtworkTable Artworks="ArtworksList" />*@

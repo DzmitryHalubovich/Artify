@@ -4,7 +4,8 @@ namespace Artify.WEB.Models
 {
     public class UserForRegistrationDto
     {
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Public name is required")]
+        public string? PublicName { get; set; }
 
         [Required(ErrorMessage = "Username is required")]
         public string? UserName { get; set; }

@@ -4,20 +4,17 @@ using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
-using Microsoft.Extensions.Configuration;
 
 namespace Artify.Services
 {
     public class ArtworkService : IArtworkService
     {
-        private readonly IConfiguration _configuration;
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
-        public ArtworkService(IRepositoryManager repository, IMapper mapper, IConfiguration configuration)
+        public ArtworkService(IRepositoryManager repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _configuration=configuration;
         }
 
         public async Task<IEnumerable<ArtworkDto>> GetAllAsync(bool trackChanges)
@@ -35,7 +32,10 @@ namespace Artify.Services
 
             if (artwork is null)
                 throw new ArtworkNotFoundException(id);
+            
+            var author = await _repository.Author.GetShortAuthor(new Guid(artwork.AuthorId));
 
+            artwork.Author = _mapper.Map<Author>(author);
             var artworkDto = _mapper.Map<ArtworkDto>(artwork);
 
             return artworkDto;
@@ -74,12 +74,6 @@ namespace Artify.Services
 
         public async Task DeleteAsync(Guid authorId, Guid artworkId, bool trackChanges)
         {
-            var author = await _repository.Author.GetByIdAsync(authorId, trackChanges);
-            if  (author is null)
-            {
-                throw new AuthorNotFoundException(authorId);
-            }
-
             var artwork = await _repository.Artwork.GetByIdAsync(artworkId, trackChanges);
 
             if (artwork is null)
@@ -87,13 +81,13 @@ namespace Artify.Services
                 throw new ArtworkNotFoundException(artworkId);
             }
 
-            var path = Path.Combine(artwork.ImageUrl);
+/*            var path = Path.Combine(artwork.ImageUrl);
             var localImageCopy = new FileInfo(path);
 
             if (localImageCopy.Exists)
             {
                 localImageCopy.Delete();
-            }
+            }*/
 
             _repository.Artwork.Delete(artwork);
             await _repository.SaveAsync();

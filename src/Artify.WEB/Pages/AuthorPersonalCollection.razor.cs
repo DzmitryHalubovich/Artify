@@ -36,6 +36,11 @@ namespace Artify.WEB.Pages
             }
         }
 
+        public async Task DeleteArtwork(Guid artworkId)
+        {
+            await ArtworkService.DeleteArtwork(Author.Id, artworkId);
+        }
+
         public void Dispose() => Interceptor.DisposeEvent();
     }
 

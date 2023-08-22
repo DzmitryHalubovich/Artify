@@ -1,5 +1,6 @@
 using Artify.API.Extensions;
 using Artify.API.Filters;
+using Artify.Presentation.ActionFilters;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
@@ -26,9 +27,11 @@ try
     builder.Services.ConfigureSqlContext(builder.Configuration);
     builder.Services.AddAutoMapper(typeof(Program));
     builder.Services.AddScoped<ValidationFilterAttribute>();
+    builder.Services.AddScoped<AuthorExistsFilterAttribute>();
 
     builder.Services.AddControllers(config =>
     {
+        config.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
         config.RespectBrowserAcceptHeader = true;
         config.ReturnHttpNotAcceptable = true;
     }).AddXmlDataContractSerializerFormatters()

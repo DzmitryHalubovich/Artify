@@ -12,12 +12,10 @@ namespace Artify.Services
     {
         private readonly IRepositoryManager _repository;
         private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
-        public AuthorService(IRepositoryManager repository, IMapper mapper, IConfiguration configuration)
+        public AuthorService(IRepositoryManager repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _configuration = configuration;
         }
 
         public  async Task<AuthorDto> CreateAsync(AuthorForCreationDto author)
@@ -30,20 +28,6 @@ namespace Artify.Services
             var authorToReturn = _mapper.Map<AuthorDto>(authorForDb);
 
             return authorToReturn;
-        }
-
-        private string CreateAuthorFoulderIfNotExistsAsync(AuthorForCreationDto author)
-        {
-            string localImagesStoragePath = _configuration.GetSection("LocalImageStorage").Value!;
-
-            var currentProjectDirectory = Directory.GetCurrentDirectory() + localImagesStoragePath;
-
-            var localAuthorFoulderWithImages = new DirectoryInfo(Path.Combine(currentProjectDirectory, author.Name));
-
-            if (!localAuthorFoulderWithImages.Exists)
-                localAuthorFoulderWithImages.Create();
-
-            return localAuthorFoulderWithImages.FullName;
         }
 
         public async Task DeleteAsync(Guid authorId, bool trackChanges)
