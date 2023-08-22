@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{31E6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C0CA54F4-6473-49C6-A75E-1BFB839FEFCE}"
 	ProjectSection(SolutionItems) = preProject
+		piplineWorkflow.yml = piplineWorkflow.yml
 		testing.yml = testing.yml
 	EndProjectSection
 EndProject
