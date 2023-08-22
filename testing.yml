@@ -1,7 +1,5 @@
 name: Test App
-
 on: push
-
 jobs: 
     build_app: 
         runs-on: ubuntu-latest
