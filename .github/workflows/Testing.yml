@@ -1,6 +1,9 @@
 name: Test App
 
-on: push
+on: 
+    push:
+        branches:
+            - developer
 
 jobs: 
     test_app: 
