@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repositories", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B463317-883C-4DCF-8F83-5BEB51F7EC34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.API.Tests", "src\Tests\Artify.API.Tests\Artify.API.Tests.csproj", "{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{88BC09B4-A502-4FCC-88BE-54CB0612CBDC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{90632C0A-2083-41A6-A243-706194665598}"
@@ -31,7 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Presentation.Tests", "src\Tests\Artify.Presentation.Tests\Artify.Presentation.Tests.csproj", "{C9E41B4F-DB81-4252-AF66-62D954A22145}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Repository.IntegrationTests", "src\Tests\Artify.Repository.Tests\Artify.Repository.IntegrationTests.csproj", "{798F110A-7F62-44C9-B770-8B80A36E366F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Repository.IntegrationTests", "src\Tests\Artify.Repository.Tests\Artify.Repository.IntegrationTests.csproj", "{798F110A-7F62-44C9-B770-8B80A36E366F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{31E66742-329A-4282-B268-8DEC315DA532}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C0CA54F4-6473-49C6-A75E-1BFB839FEFCE}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\Build and test.yml = .github\workflows\Build and test.yml
+		.github\workflows\Testing.yml = .github\workflows\Testing.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +77,6 @@ Global
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9E41B4F-DB81-4252-AF66-62D954A22145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9E41B4F-DB81-4252-AF66-62D954A22145}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9E41B4F-DB81-4252-AF66-62D954A22145}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,9 +96,9 @@ Global
 		{287F42F4-0DFB-40D2-BD87-93AC6E2E2628} = {3B0FC3BF-82D3-429B-AF8F-ABA75E1C8704}
 		{24588DDF-2D73-4C6E-A1D9-AECC60399CC6} = {88BC09B4-A502-4FCC-88BE-54CB0612CBDC}
 		{9EDFF0C7-4A16-4796-B642-C42F57AC7B3D} = {88BC09B4-A502-4FCC-88BE-54CB0612CBDC}
-		{F5CA897B-609F-46C8-A036-4C63EEB6D3C8} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 		{C9E41B4F-DB81-4252-AF66-62D954A22145} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 		{798F110A-7F62-44C9-B770-8B80A36E366F} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
+		{C0CA54F4-6473-49C6-A75E-1BFB839FEFCE} = {31E66742-329A-4282-B268-8DEC315DA532}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FAEC480-0E64-4A61-9E19-086024D8BC8C}
