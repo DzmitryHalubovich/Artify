@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Artify.Repositories.Configuration
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+    public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole<Guid>>
     {
-        public void Configure(EntityTypeBuilder<IdentityRole> builder)
+        public void Configure(EntityTypeBuilder<IdentityRole<Guid>> builder)
         {
             builder.HasData(
-                new IdentityRole
+                new IdentityRole <Guid>()
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Author",
                     NormalizedName = "AUTHOR"
                 });
