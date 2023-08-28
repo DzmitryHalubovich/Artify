@@ -70,6 +70,13 @@ try
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
+
+    var foulderDoesExist = new DirectoryInfo(Path.Combine(Directory.GetCurrentDirectory(), @"artworks-collection"));
+    if (!foulderDoesExist.Exists)
+    {
+        foulderDoesExist.Create();
+    }
+
     app.UseStaticFiles(new StaticFileOptions()
     {
         FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"artworks-collection")),

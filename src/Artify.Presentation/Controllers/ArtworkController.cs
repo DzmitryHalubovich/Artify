@@ -12,8 +12,8 @@ namespace Artify.Presentation.Controllers
     [Route("api")]
     public class ArtworkController : ControllerBase
     {
-        private readonly IServiceManager _service;
         private readonly ILogger _logger;
+        private readonly IServiceManager _service;
 
         public ArtworkController(IServiceManager service, ILoggerFactory logger)
         {

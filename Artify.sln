@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{4DF97C5A-1AA5-4F4F-A771-9274BF829F31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Presentation.IntegrationTests", "src\Tests\Artify.Presentation.IntegrationTests\Artify.Presentation.IntegrationTests.csproj", "{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{798F110A-7F62-44C9-B770-8B80A36E366F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{798F110A-7F62-44C9-B770-8B80A36E366F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{798F110A-7F62-44C9-B770-8B80A36E366F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{C9E41B4F-DB81-4252-AF66-62D954A22145} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 		{798F110A-7F62-44C9-B770-8B80A36E366F} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 		{C0CA54F4-6473-49C6-A75E-1BFB839FEFCE} = {31E66742-329A-4282-B268-8DEC315DA532}
+		{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6} = {3B463317-883C-4DCF-8F83-5BEB51F7EC34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FAEC480-0E64-4A61-9E19-086024D8BC8C}

@@ -26,6 +26,8 @@ namespace Artify.Repository.Tests
                 var newAuthor = new Author()
                 {
                     UserName = "TestUserName",
+                    Email = "testmail@gmail.com",
+
                     Profile = new AuthorProfile() 
                     {
                         Name = "Test",
