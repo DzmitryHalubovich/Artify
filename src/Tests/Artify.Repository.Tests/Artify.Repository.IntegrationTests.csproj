@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Artify.API\Artify.API.csproj" />
-    <ProjectReference Include="..\Artify.Presentation.Tests\Artify.Presentation.Tests.csproj" />
+    <ProjectReference Include="..\Artify.Presentation.Tests\Artify.Presentation.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -23,7 +23,6 @@ namespace Artify.Presentation.IntegrationTests
                     options.UseInMemoryDatabase("InMemoryEmployeeTest");
                 });
 
-
                 var sp = services.BuildServiceProvider();
 
                 using (var scope = sp.CreateScope())

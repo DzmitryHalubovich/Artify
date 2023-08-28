@@ -14,7 +14,7 @@ namespace Artify.Repository.Repositories
         public void Delete(Author author) => DeleteEntity(author);
 
         public async Task<Author> GetByIdAsync(Guid authorId, bool trackChanges) => 
-            await FindByCondition(a => a.Id.Equals(authorId.ToString()), trackChanges)
+            await FindByCondition(a => a.Id.Equals(authorId), trackChanges)
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Author>> GetAllAuthorsAsync(bool trackChanges) => 

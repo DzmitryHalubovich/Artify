@@ -1,6 +1,7 @@
 ﻿using Artify.Entities.DTO.Authorization;
 using Artify.Entities.Exceptions;
 using Artify.Entities.Models;
+using Artify.Repositories.Contracts;
 using Artify.Services.Contracts;
 using AutoMapper;
 using Azure.Core;
@@ -20,15 +21,16 @@ namespace Artify.Services
         private readonly UserManager<Author> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly IConfiguration _configuration;
-        private Author? _user;
+        private Author? _user;        private readonly IRepositoryManager _repository;
 
-        public AuthenticationService(IMapper mapper, UserManager<Author> userManager, 
-            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager)
+        public AuthenticationService(IMapper mapper, UserManager<Author> userManager,
+            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager, IRepositoryManager repository)
         {
             _mapper=mapper;
             _userManager=userManager;
             _configuration=configuration;
             _roleManager=roleManager;
+            _repository=repository;
         }
 
         public async Task<TokenDto> CreateToken(bool populateExp)
@@ -60,7 +62,11 @@ namespace Artify.Services
             userForRegistration.Password);
 
             if (result.Succeeded)
+            {
                 await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
+                await _repository.AuthorProfile.CreateDefault(user);
+                await _repository.SaveAsync();
+            }
 
             _user = await _userManager.FindByNameAsync(userForRegistration.UserName);
 

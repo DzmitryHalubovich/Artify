@@ -1,5 +1,4 @@
 ﻿using Artify.Entities.DTO.Authorization;
-using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Net.Http.Json;
 

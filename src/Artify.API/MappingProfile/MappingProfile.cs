@@ -23,6 +23,8 @@ namespace Artify.API.MappingProfile
 
             CreateMap<Artwork, ArtworkDto>();
 
+            CreateMap<AuthorProfileUpdateDto, AuthorProfile>();
+
             CreateMap<ArtworkForCreationDto, Artwork>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));

@@ -38,6 +38,16 @@ namespace Artify.Presentation.Controllers
             return Ok(artworks);
         }
 
+        [HttpPut("{authorId:guid}/profile")]
+        public async Task<IActionResult> UpdateAuthorProfile(Guid authorId, AuthorProfileUpdateDto authorProfile)
+        {
+            var doesAuthorExists = await _service.AuthorService.GetByIdAsync(authorId, false);
+
+            await _service.AuthorProfileService.Update(authorId, authorProfile);
+
+            return Ok(authorProfile);
+        }
+
         [HttpDelete("{authorId:guid}")]
         public async Task<IActionResult> DeleteAuthor(Guid authorId)
         {
