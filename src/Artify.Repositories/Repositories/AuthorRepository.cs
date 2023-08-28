@@ -22,23 +22,6 @@ namespace Artify.Repository.Repositories
                 .OrderBy(c=>c.UserName)
                 .ToListAsync();
 
-        public async Task<AuthorDto> GetShortAuthor(Guid authorId)
-        {
-            var temp = await FindByCondition(a => a.Id.Equals(authorId.ToString()), false)
-                .Select(a => new
-                {
-                    a.Id,
-                    a.PublicName
-                }).SingleOrDefaultAsync();
-
-            var author = new AuthorDto()
-            {
-                Id = new Guid(temp.Id),
-                PublicName = temp.PublicName,
-            };
-
-            return author;
-        }
     }
 
 }

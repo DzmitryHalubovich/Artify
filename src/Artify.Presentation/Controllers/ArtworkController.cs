@@ -22,13 +22,13 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpGet("artworks")]
-        [Authorize]
         public async Task<IActionResult> GetArtworks()
         {
             var artworks = await _service.ArtworkService.GetAllAsync(trackChanges: false);
 
             return Ok(artworks);
         }
+
 
         [HttpGet("{authorId}/artworks")]
         public async Task<IActionResult> GetArtworksForAuthor(Guid authorId)
@@ -58,7 +58,7 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpDelete("authors/{authorId:guid}/artworks/{artworkId:guid}")]
-        [ServiceFilter(typeof(AuthorExistsFilterAttribute))]
+        //[ServiceFilter(typeof(AuthorExistsFilterAttribute))]
         public async Task<IActionResult> DeleteArtwork(Guid authorId, Guid artworkId)
         {
             await _service.ArtworkService.DeleteAsync(authorId, artworkId, trackChanges: false);

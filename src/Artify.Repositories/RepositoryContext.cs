@@ -1,14 +1,17 @@
 ﻿using Artify.Entities.Models;
 using Artify.Repositories.Configuration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
 namespace Artify.Repository
 {
-    public class RepositoryContext : IdentityDbContext<Author>
+    public class RepositoryContext 
+        : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
     {
-        public RepositoryContext(DbContextOptions options) : base(options) { }
+        public RepositoryContext(DbContextOptions<RepositoryContext> options) 
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -18,5 +21,7 @@ namespace Artify.Repository
 
         public DbSet<Artwork> Artworks { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<AuthorProfile> AuthorProfiles { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

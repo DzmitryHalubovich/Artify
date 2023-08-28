@@ -1,5 +1,4 @@
-﻿using Artify.DAL;
-using Artify.Entities.Models;
+﻿using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +24,7 @@ namespace Artify.Repository.Repositories
 
         public void CreateNewForAuthor(Guid authorId, Artwork artwork)
         {
-            artwork.AuthorId = authorId.ToString();
+            artwork.AuthorId = authorId;
             CreateEntity(artwork);
         }
 

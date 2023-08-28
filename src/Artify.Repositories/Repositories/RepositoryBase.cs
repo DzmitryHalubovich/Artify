@@ -1,10 +1,5 @@
-﻿using Artify.DAL;
-using Artify.Entities.DTO;
-using Artify.Entities.Models;
-using Artify.Repositories.Contracts;
+﻿using Artify.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Artify.Repository.Repositories

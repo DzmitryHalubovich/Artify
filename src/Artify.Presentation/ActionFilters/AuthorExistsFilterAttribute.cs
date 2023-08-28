@@ -29,7 +29,7 @@ namespace Artify.Presentation.ActionFilters
 
             try
             {
-                var authorExists = await _repositoryManager.Author.GetShortAuthor(new Guid(authorId.ToString()));
+               //var authorExists = await _repositoryManager.Author.GetShortAuthor(new Guid(authorId.ToString()));
             }
             catch
             {

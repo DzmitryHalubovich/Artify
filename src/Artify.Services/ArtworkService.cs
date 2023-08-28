@@ -33,9 +33,9 @@ namespace Artify.Services
             if (artwork is null)
                 throw new ArtworkNotFoundException(id);
             
-            var author = await _repository.Author.GetShortAuthor(new Guid(artwork.AuthorId));
+            //var author = await _repository.Author.GetShortAuthor(new Guid(artwork.AuthorId));
 
-            artwork.Author = _mapper.Map<Author>(author);
+            //artwork.Author = _mapper.Map<Author>(author);
             var artworkDto = _mapper.Map<ArtworkDto>(artwork);
 
             return artworkDto;

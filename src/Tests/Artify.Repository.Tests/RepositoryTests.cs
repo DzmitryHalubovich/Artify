@@ -16,7 +16,6 @@ namespace Artify.Repository.Tests
             optionsBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod().Name);
         }
        
-
         [Fact]
         public async Task Repo()
         {
@@ -26,46 +25,24 @@ namespace Artify.Repository.Tests
 
                 var newAuthor = new Author()
                 {
-                    PublicName = "TestName",
                     UserName = "TestUserName",
+                    Profile = new AuthorProfile() 
+                    {
+                        Name = "Test",
+                        City = "TestCity",
+                        Profession = "TestProfession",
+                        Country = "TestCountry"
+                    }
                 };
 
                 _repository.Author.Create(newAuthor);
 
                 await _repository.SaveAsync();
 
-                var hasCreated = await _repository.Author.GetByIdAsync(new Guid(newAuthor.Id), true);
+                var hasCreated = await _repository.Author.GetByIdAsync(newAuthor.Id, true);
 
                 Assert.NotNull(hasCreated);
-                Assert.Equal("TestName", hasCreated.PublicName);
                 Assert.Equal("TestUserName", hasCreated.UserName);
-            }
-        }
-
-        [Fact]
-        public async Task AuthorRepository_GetShortAuthor_GetAuthor()
-        {
-            using (RepositoryContext rep = new(optionsBuilder.Options))
-            {
-                //Arrange
-                _repository = new RepositoryManager(rep);
-
-                var newAuthor = new Author()
-                {
-                    PublicName = "TestName",
-                    UserName = "TestUserName",
-                };
-
-                _repository.Author.Create(newAuthor);
-                await _repository.SaveAsync();
-
-                //Act
-                var tryGetShortAuthor = await _repository.Author.GetShortAuthor(new Guid(newAuthor.Id));
-
-                //Assert
-                Assert.NotNull(tryGetShortAuthor);
-                Assert.Equal("TestName", tryGetShortAuthor.PublicName);
-                Assert.Equal(newAuthor.Id, tryGetShortAuthor.Id.ToString());
             }
         }
     }

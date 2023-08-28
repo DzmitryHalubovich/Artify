@@ -18,12 +18,12 @@ namespace Artify.Services
     {
         private readonly IMapper _mapper;
         private readonly UserManager<Author> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly IConfiguration _configuration;
         private Author? _user;
 
         public AuthenticationService(IMapper mapper, UserManager<Author> userManager, 
-            IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _mapper=mapper;
             _userManager=userManager;
@@ -84,8 +84,11 @@ userForAuth.Password));
         {
             var claims = new List<Claim>
             {
-                new Claim("AuthorId", _user.Id),
-                new Claim("PublicName", _user.PublicName),
+                new Claim("AuthorId", _user.Id.ToString()),
+                new Claim("Name", _user.Profile.Name),
+                new Claim("Email", _user.Email),
+                new Claim("City", _user.Profile.City),
+                new Claim("Country", _user.Profile.Country),
                 new Claim(ClaimTypes.Name, _user.UserName)
             };
             var roles = await _userManager.GetRolesAsync(_user);

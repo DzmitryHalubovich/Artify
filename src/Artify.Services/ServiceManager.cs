@@ -15,7 +15,7 @@ namespace Artify.Services
         public ServiceManager(IRepositoryManager repositoryManager, 
             IMapper mapper,
             UserManager<Author> userManager,
-            RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole<Guid>> roleManager,
             IConfiguration configuration)
         {
             _artworkService = new Lazy<IArtworkService>(() =>

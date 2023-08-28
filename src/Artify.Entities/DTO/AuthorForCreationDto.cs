@@ -8,5 +8,4 @@ namespace Artify.Entities.DTO
         [MaxLength(20, ErrorMessage = "Maximum length for the Name is 20 characters.")]
         public string PublicName { get; init; }
     }
-
 }
