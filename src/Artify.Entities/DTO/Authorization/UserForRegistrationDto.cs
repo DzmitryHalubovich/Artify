@@ -1,11 +1,9 @@
-﻿using Microsoft.VisualBasic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Artify.Entities.DTO.Authorization
 {
     public class UserForRegistrationDto
     {
-
         [Required(ErrorMessage = "Username is required")]
         [MaxLength(20, ErrorMessage = "Username is too long. Max length is 20 symbols.")]
         public string? UserName { get; init; }

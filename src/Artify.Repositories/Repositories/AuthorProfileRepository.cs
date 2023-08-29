@@ -3,6 +3,7 @@ using Artify.Entities.Models;
 using Artify.Repositories.Contracts;
 using Artify.Repository;
 using Artify.Repository.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Artify.Repositories.Repositories
 {
@@ -23,6 +24,10 @@ namespace Artify.Repositories.Repositories
 
             await CreateEntity(defaultAuthorProfile);
         }
+
+        public async Task<AuthorProfile> GetByIdAsync(Guid authorId, bool trackChanges) => 
+           await FindByCondition(x=>x.AuthorId.Equals(authorId), trackChanges).SingleOrDefaultAsync();
+
 
         public void Update(AuthorProfile authorProfile) => UpdateEntity(authorProfile);
 

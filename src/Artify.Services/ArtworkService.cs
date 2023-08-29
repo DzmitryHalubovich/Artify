@@ -1,11 +1,4 @@
-﻿using Artify.Entities.DTO.Artwork;
-using Artify.Entities.Exceptions;
-using Artify.Entities.Models;
-using Artify.Repositories.Contracts;
-using Artify.Services.Contracts;
-using AutoMapper;
-
-namespace Artify.Services
+﻿namespace Artify.Services
 {
     public class ArtworkService : IArtworkService
     {
@@ -33,9 +26,6 @@ namespace Artify.Services
             if (artwork is null)
                 throw new ArtworkNotFoundException(id);
             
-            //var author = await _repository.Author.GetShortAuthor(new Guid(artwork.AuthorId));
-
-            //artwork.Author = _mapper.Map<Author>(author);
             var artworkDto = _mapper.Map<ArtworkDto>(artwork);
 
             return artworkDto;

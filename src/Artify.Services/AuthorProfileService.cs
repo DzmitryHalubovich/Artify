@@ -1,15 +1,4 @@
-﻿using Artify.Entities.DTO;
-using Artify.Entities.Models;
-using Artify.Repositories.Contracts;
-using Artify.Services.Contracts;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Artify.Services
+﻿namespace Artify.Services
 {
     public class AuthorProfileService : IAuthorProfileService
     {
@@ -31,6 +20,5 @@ namespace Artify.Services
             _repositoryManager.AuthorProfile.Update(newAuthorProfile);
             await _repositoryManager.SaveAsync();
         }
-
     }
 }

@@ -12,14 +12,10 @@ namespace Artify.API.MappingProfile
         {
             CreateMap<UserForRegistrationDto, Author>();
             CreateMap<Author, UserForAuthenticationDto>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.PasswordHash));
 
             CreateMap<Author, AuthorDto>();
             CreateMap<AuthorDto, Author>();
-
-            CreateMap<AuthorForCreationDto, Author>();
-            CreateMap<Author, AuthorForCreationDto>();
 
             CreateMap<Artwork, ArtworkDto>();
 

@@ -1,36 +1,21 @@
-﻿using Artify.Entities.DTO.Authorization;
-using Artify.Entities.Exceptions;
-using Artify.Entities.Models;
-using Artify.Repositories.Contracts;
-using Artify.Services.Contracts;
-using AutoMapper;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace Artify.Services
+﻿namespace Artify.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IMapper _mapper;
-        private readonly UserManager<Author> _userManager;
-        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        private Author? _user;        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        private Author? _user;        private readonly IRepositoryManager _repository;
+        private readonly IRepositoryManager _repository;        private readonly UserManager<Author> _userManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
-        public AuthenticationService(IMapper mapper, UserManager<Author> userManager,
-            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager, IRepositoryManager repository)
+
+        public AuthenticationService(IRepositoryManager repository, IMapper mapper, UserManager<Author> userManager,
+            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager)
         {
+            _repository=repository;
             _mapper=mapper;
             _userManager=userManager;
             _configuration=configuration;
             _roleManager=roleManager;
-            _repository=repository;
         }
 
         public async Task<TokenDto> CreateToken(bool populateExp)
@@ -74,7 +59,7 @@ namespace Artify.Services
 
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {
-            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            _user = await _userManager.FindByEmailAsync(userForAuth.Email);
             var result = (_user != null && await _userManager.CheckPasswordAsync(_user,
 userForAuth.Password));
 
@@ -88,13 +73,15 @@ userForAuth.Password));
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }        private async Task<List<Claim>> GetClaims()
         {
+            var userProfile = await _repository.AuthorProfile.GetByIdAsync(_user.Id, false);
+
             var claims = new List<Claim>
             {
                 new Claim("AuthorId", _user.Id.ToString()),
-                new Claim("Name", _user.Profile.Name),
+                new Claim("PublicName", userProfile.Name),
                 new Claim("Email", _user.Email),
-                new Claim("City", _user.Profile.City),
-                new Claim("Country", _user.Profile.Country),
+                new Claim("City", userProfile.City),
+                new Claim("Country", userProfile.Country),
                 new Claim(ClaimTypes.Name, _user.UserName)
             };
             var roles = await _userManager.GetRolesAsync(_user);

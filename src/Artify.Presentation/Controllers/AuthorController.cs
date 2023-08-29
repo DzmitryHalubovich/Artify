@@ -55,14 +55,5 @@ namespace Artify.Presentation.Controllers
 
             return NoContent();
         }
-
-        [HttpPost]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> CreateAuthor(AuthorForCreationDto author)
-        {
-            var createdAuthor = await  _service.AuthorService.CreateAsync(author);
-
-            return CreatedAtRoute("AuthorById", new { authorId = createdAuthor.Id }, createdAuthor);
-        }
     }
 }
