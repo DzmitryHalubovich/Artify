@@ -80,6 +80,7 @@ userForAuth.Password));
                 new Claim("AuthorId", _user.Id.ToString()),
                 new Claim("PublicName", userProfile.Name),
                 new Claim("Email", _user.Email),
+                new Claim("Profession", userProfile.Profession),
                 new Claim("City", userProfile.City),
                 new Claim("Country", userProfile.Country),
                 new Claim(ClaimTypes.Name, _user.UserName)

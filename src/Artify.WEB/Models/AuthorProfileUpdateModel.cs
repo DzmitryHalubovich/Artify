@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Artify.Entities.DTO
+namespace Artify.WEB.Models
 {
-    public class AuthorProfileUpdateDto
+    public class AuthorProfileUpdateModel
     {
         [Required(ErrorMessage = "Field Name is required.")]
         public string Name { get; set; }

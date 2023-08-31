@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using Artify.WEB.Services.Interfaces;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Artify.WEB.Services
 {

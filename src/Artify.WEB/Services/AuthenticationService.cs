@@ -1,5 +1,6 @@
 ﻿using Artify.WEB.AuthProviders;
 using Artify.WEB.Models;
+using Artify.WEB.Services.Interfaces;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;

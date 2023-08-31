@@ -1,4 +1,5 @@
 ﻿using Artify.WEB.Models;
+using Artify.WEB.Services.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Artify.WEB.Services
         public async Task CreateArtwork(ArtworkCreateModel artwork)
         {
             var authState = await _authProvider.GetAuthenticationStateAsync();
-            var userId = authState.User.FindFirst("AuthorId")!.Value;
+            var userId = authState.User.FindFirst("PublicName")!.Value;
 
             var postResult = await _client.PostAsJsonAsync($"api/authors/{userId}/artworks", artwork);
             var postContent = await postResult.Content.ReadAsStringAsync();

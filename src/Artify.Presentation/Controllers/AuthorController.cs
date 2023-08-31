@@ -39,7 +39,7 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpPut("{authorId:guid}/profile")]
-        public async Task<IActionResult> UpdateAuthorProfile(Guid authorId, AuthorProfileUpdateDto authorProfile)
+        public async Task<IActionResult> UpdateAuthorProfile(Guid authorId,[FromBody] AuthorProfileUpdateDto authorProfile)
         {
             var doesAuthorExists = await _service.AuthorService.GetByIdAsync(authorId, false);
 

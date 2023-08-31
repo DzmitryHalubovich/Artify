@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contracts", "Contracts", "{4DF97C5A-1AA5-4F4F-A771-9274BF829F31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artify.Presentation.IntegrationTests", "src\Tests\Artify.Presentation.IntegrationTests\Artify.Presentation.IntegrationTests.csproj", "{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artify.Presentation.IntegrationTests", "src\Tests\Artify.Presentation.IntegrationTests\Artify.Presentation.IntegrationTests.csproj", "{B5E31E8E-1C78-4A55-BEA5-F41411AFFDD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
