@@ -1,18 +1,10 @@
-﻿using Artify.WEB.Models;
-using Artify.WEB.Services.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-
-namespace Artify.WEB.Services
+﻿namespace Artify.WEB.Services
 {
     public class ArtworkService : IArtworkService
     {
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
         private readonly AuthenticationStateProvider _authProvider;
-        //New
 
         public ArtworkService(HttpClient client, AuthenticationStateProvider authProvider)
         {

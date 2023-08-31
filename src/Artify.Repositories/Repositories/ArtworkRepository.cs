@@ -15,10 +15,11 @@ namespace Artify.Repository.Repositories
 
         public async Task<Artwork> GetByIdAsync(Guid artworkId, bool trackChanges) =>
             await FindByCondition(a => a.ArtworkId.Equals(artworkId), trackChanges)
+                .Include(x=>x.AuthorProfile)
                 .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Artwork>> GetAllForAuthorAsync(Guid authorId, bool trackChanges) =>
-           await FindByCondition(a => a.AuthorId.Equals(authorId.ToString()), trackChanges: false)
+           await FindByCondition(a => a.AuthorId.Equals(authorId), trackChanges: false)
                 .OrderByDescending(x => x.ArtworkId)
                 .ToListAsync();
 

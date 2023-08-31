@@ -1,6 +1,4 @@
-﻿using Artify.WEB.Models;
-
-namespace Artify.WEB.Services.Interfaces
+﻿namespace Artify.WEB.Services.Interfaces
 {
     public interface IArtworkService
     {

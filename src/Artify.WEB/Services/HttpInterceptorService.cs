@@ -1,7 +1,4 @@
-﻿using System.Net.Http.Headers;
-using Toolbelt.Blazor;
-
-namespace Artify.WEB.Services
+﻿namespace Artify.WEB.Services
 {
     public class HttpInterceptorService
     {

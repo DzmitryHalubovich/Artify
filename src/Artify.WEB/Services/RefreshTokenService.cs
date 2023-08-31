@@ -1,7 +1,4 @@
-﻿using Artify.WEB.Services.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
-
-namespace Artify.WEB.Services
+﻿namespace Artify.WEB.Services
 {
     public class RefreshTokenService
     {

@@ -3,11 +3,18 @@
     public class ArtworkModel
     {
         public Guid ArtworkId { get; set; }
-        public AuthorModel Author { get; set; } = new AuthorModel();
-        public string Title { get; set; } = default!;
-
+        public Guid AuthorId { get; set; }
+        public AuthorProfile AuthorProfile { get; set; }
+        public string Title { get; set; }
         public string? Description { get; set; }
+        public string ImageUrl { get; set; }
 
-        public string ImageUrl { get; set; } = default!;
+        public DateTime Created { get; set; }
+
+        public int Likes { get; set; }
+
+        public int Views { get; set; }
+
+        public ICollection<Comment>? Comments { get; set; }
     }
 }

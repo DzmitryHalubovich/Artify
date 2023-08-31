@@ -1,8 +1,4 @@
-﻿using Artify.WEB.Models;
-using Artify.WEB.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
-
-namespace Artify.WEB.Pages
+﻿namespace Artify.WEB.Pages
 {
     public partial class ArtworkDetails
     {

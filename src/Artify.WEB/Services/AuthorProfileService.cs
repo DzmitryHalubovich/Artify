@@ -1,9 +1,4 @@
-﻿using Artify.WEB.Models;
-using Artify.WEB.Services.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http.Json;
-
-namespace Artify.WEB.Services
+﻿namespace Artify.WEB.Services
 {
     public class AuthorProfileService : IAuthorProfileService
     {
