@@ -22,10 +22,11 @@ namespace Artify.Repository.Repositories
                 .OrderByDescending(x => x.ArtworkId)
                 .ToListAsync();
 
-        public void CreateNewForAuthor(Guid authorId, Artwork artwork)
+        public async Task CreateNewForAuthor(Guid authorId, Artwork artwork)
         {
             artwork.AuthorId = authorId;
-            CreateEntity(artwork);
+            artwork.Created = DateTime.Now;
+            await CreateEntity(artwork);
         }
 
         public void Delete(Artwork artwork) => DeleteEntity(artwork);

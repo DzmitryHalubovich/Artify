@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Entities.Models
@@ -21,8 +22,9 @@ namespace Artify.Entities.Models
 
         public DateTime Created { get; set; }
 
+        [DefaultValue(0)]
         public int Likes { get; set; }
-
+        [DefaultValue(0)]
         public int Views { get; set; }
 
         public ICollection<Comment>? Comments { get; set; } 

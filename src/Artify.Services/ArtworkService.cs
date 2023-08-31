@@ -53,7 +53,6 @@
                 throw new AuthorNotFoundException(authorId);
 
             var artworkEntity = _mapper.Map<Artwork>(artwork);
-
             _repository.Artwork.CreateNewForAuthor(authorId,artworkEntity);
             await _repository.SaveAsync();
 
@@ -70,14 +69,6 @@
             {
                 throw new ArtworkNotFoundException(artworkId);
             }
-
-/*            var path = Path.Combine(artwork.ImageUrl);
-            var localImageCopy = new FileInfo(path);
-
-            if (localImageCopy.Exists)
-            {
-                localImageCopy.Delete();
-            }*/
 
             _repository.Artwork.Delete(artwork);
             await _repository.SaveAsync();
