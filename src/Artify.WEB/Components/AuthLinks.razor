@@ -2,6 +2,7 @@
     <Authorized>
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
+                <img style="width:30px; height:30px; border-radius:  50%" src="@context.User.FindFirst("AvatarUrl")!.Value" />
                 <span>@context.User.FindFirst("PublicName")!.Value</span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

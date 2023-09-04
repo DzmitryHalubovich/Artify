@@ -83,6 +83,7 @@ userForAuth.Password));
                 new Claim("Profession", userProfile.Profession),
                 new Claim("City", userProfile.City),
                 new Claim("Country", userProfile.Country),
+                new Claim("AvatarUrl", userProfile.AvatarUrl),
                 new Claim(ClaimTypes.Name, _user.UserName)
             };
             var roles = await _userManager.GetRolesAsync(_user);

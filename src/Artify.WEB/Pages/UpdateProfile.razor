@@ -30,9 +30,18 @@
         </div>
     </div>
 
+    
+
+    <label for="image" class="col-md-2 col-form-label">Image:</label>
+    <div class="col-md-10">
+        <img src=@_profileUpdateDto.AvatarUrl />
+        <ImageUpload OnChange="AssignImageUrl" />
+    </div>
+
     <div class="row">
         <div class="col-md-12 text-right">
             <button type="submit" class="btn btn-success">Update</button>
         </div>
     </div>
+
 </EditForm>

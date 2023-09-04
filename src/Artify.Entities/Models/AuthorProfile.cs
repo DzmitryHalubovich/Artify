@@ -19,6 +19,8 @@ namespace Artify.Entities.Models
 
         public required string Country { get; set; }
 
+        public string AvatarUrl { get; set; }
+
         public ICollection<Artwork>? Artworks { get; set; }
     }
 }
