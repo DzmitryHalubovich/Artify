@@ -15,5 +15,6 @@ namespace Artify.Entities.DTO
 
         [Required(ErrorMessage = "Field Country is required.")]
         public string Country { get; set; }
+        public string AvatarUrl { get; set; }
     }
 }

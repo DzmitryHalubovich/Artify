@@ -21,6 +21,7 @@ namespace Artify.API.MappingProfile
             CreateMap<Artwork, ArtworkDetailsDto>()
                 .ForMember(dest => dest.AuthorPublicName, opt => opt.MapFrom(src => src.AuthorProfile.Name))
                 .ForMember(dest => dest.Profession, opt => opt.MapFrom(src => src.AuthorProfile.Profession))
+                .ForMember(dest => dest.AvatarUrl, opt => opt.MapFrom(src => src.AuthorProfile.AvatarUrl))
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created.ToString()));
 
 

@@ -22,7 +22,7 @@ namespace Artify.WEB.Models.Artwork
 
 
         //Author profile 
-
+        public string AvatarUrl { get; set; }
         public string AuthorPublicName { get; set; }
 
         public string Profession { get; set; }

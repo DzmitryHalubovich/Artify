@@ -19,7 +19,8 @@ namespace Artify.Repositories.Repositories
                 City = "Default",
                 Country = "Default",
                 Name = author.UserName,
-                Profession = "Author"
+                Profession = "Author",
+                AvatarUrl = "https://localhost:7062/artworks-collection\\Images\\5034901-200.png"
             };
 
             await CreateEntity(defaultAuthorProfile);

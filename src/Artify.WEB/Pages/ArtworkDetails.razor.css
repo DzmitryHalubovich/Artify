@@ -6,6 +6,7 @@
     display: block;
     margin: auto;
     max-height: 800px;
+    max-width:900px;
 }
 
 .image-container {
