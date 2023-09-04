@@ -19,14 +19,14 @@
             return artworksDto;
         }
 
-        public async Task<ArtworkDto> GetByIdAsync(Guid authorId, bool trackChanges)
+        public async Task<ArtworkDetailsDto> GetByIdAsync(Guid authorId, bool trackChanges)
         {
             var artwork = await _repository.Artwork.GetByIdAsync(authorId, trackChanges);
 
             if (artwork is null)
                 throw new ArtworkNotFoundException(authorId);
             
-            var artworkDto = _mapper.Map<ArtworkDto>(artwork);
+            var artworkDto = _mapper.Map<ArtworkDetailsDto>(artwork);
 
             return artworkDto;
         }

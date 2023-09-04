@@ -1,11 +1,13 @@
-﻿namespace Artify.WEB.Pages
+﻿using Artify.WEB.Models.Artwork;
+
+namespace Artify.WEB.Pages
 {
     public partial class ArtworkDetails
     {
         [Parameter]
         public Guid ArtworkId { get; set; }
 
-        public ArtworkModel artwork = new ArtworkModel();
+        public ArtworkDetailsModel artwork = new ArtworkDetailsModel();
 
         [Inject]
         public IArtworkService ArtworkService { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Artify.WEB.Models
+﻿namespace Artify.WEB.Models.Artwork
 {
     public class ArtworkModel
     {

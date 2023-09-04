@@ -1,10 +1,12 @@
-﻿namespace Artify.WEB.Services.Interfaces
+﻿using Artify.WEB.Models.Artwork;
+
+namespace Artify.WEB.Services.Interfaces
 {
     public interface IArtworkService
     {
-        Task<IEnumerable<ArtworkModel>> GetArtworks();
-        Task<IEnumerable<ArtworkModel>> GetArtworksForAuthor(Guid authorId);
-        Task<ArtworkModel> GetArtwork(Guid id);
+        Task<IEnumerable<ArtworkDetailsModel>> GetArtworks();
+        Task<IEnumerable<ArtworkDetailsModel>> GetArtworksForAuthor(Guid authorId);
+        Task<ArtworkDetailsModel> GetArtwork(Guid id);
         Task CreateArtwork(ArtworkCreateModel product);
         Task<string> UploadProductImage(MultipartFormDataContent content);
 

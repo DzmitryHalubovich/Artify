@@ -9,7 +9,6 @@ namespace Artify.WEB.Models
         public Guid AuthorId { get; set; }
 
         [ForeignKey(nameof(AuthorId))]
-        public Author Author { get; set; }
 
         public string Name { get; set; }
 
@@ -19,7 +18,6 @@ namespace Artify.WEB.Models
 
         public string Country { get; set; }
 
-        public ICollection<Artwork>? Artworks { get; set; }
 
     }
 }

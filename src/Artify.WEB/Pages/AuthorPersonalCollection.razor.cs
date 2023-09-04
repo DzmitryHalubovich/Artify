@@ -1,4 +1,4 @@
-﻿using Artify.WEB.Models;
+﻿using Artify.WEB.Models.Artwork;
 using Artify.WEB.Services;
 using Artify.WEB.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
@@ -17,7 +17,7 @@ namespace Artify.WEB.Pages
         [Inject]
         public AuthenticationStateProvider _authProvider { get; set; }
 
-        public IEnumerable<ArtworkModel> ArtworksList { get; set; } = new List<ArtworkModel>();
+        public IEnumerable<ArtworkDetailsModel> ArtworksList { get; set; } = new List<ArtworkDetailsModel>();
 
         public AuthorModel Author { get; set; } = new AuthorModel();
 

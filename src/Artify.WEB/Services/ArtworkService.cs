@@ -1,4 +1,6 @@
-﻿namespace Artify.WEB.Services
+﻿using Artify.WEB.Models.Artwork;
+
+namespace Artify.WEB.Services
 {
     public class ArtworkService : IArtworkService
     {
@@ -32,13 +34,13 @@
             var deleteResult = await _client.DeleteAsync($"api/authors/{authorId}/artworks/{artworkId}");
         }
 
-        public async Task<ArtworkModel> GetArtwork(Guid artworkId)
+        public async Task<ArtworkDetailsModel> GetArtwork(Guid artworkId)
         {
-            var product = await _client.GetFromJsonAsync<ArtworkModel>($"/api/artworks/{artworkId}");
+            var product = await _client.GetFromJsonAsync<ArtworkDetailsModel>($"/api/artworks/{artworkId}");
             return product;
         }
 
-        public async Task<IEnumerable<ArtworkModel>> GetArtworks()
+        public async Task<IEnumerable<ArtworkDetailsModel>> GetArtworks()
         {
             var response = await _client.GetAsync("api/artworks");
             var content = await response.Content.ReadAsStringAsync();
@@ -48,11 +50,11 @@
                 throw new ApplicationException(content);
             }
 
-            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
+            var artworks = JsonSerializer.Deserialize<List<ArtworkDetailsModel>>(content, _options);
             return artworks;
         }
 
-        public async Task<IEnumerable<ArtworkModel>> GetArtworksForAuthor(Guid authorId)
+        public async Task<IEnumerable<ArtworkDetailsModel>> GetArtworksForAuthor(Guid authorId)
         {
             var response = await _client.GetAsync($"api/{authorId}/artworks");
             var content = await response.Content.ReadAsStringAsync();
@@ -62,7 +64,7 @@
                 throw new ApplicationException(content);
             }
 
-            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
+            var artworks = JsonSerializer.Deserialize<List<ArtworkDetailsModel>>(content, _options);
             return artworks;
         }
         public async Task<AuthorModel> GetAuthor(Guid authorId)
