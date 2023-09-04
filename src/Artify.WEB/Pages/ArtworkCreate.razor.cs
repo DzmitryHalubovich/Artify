@@ -1,5 +1,6 @@
-﻿using Artify.WEB.Models;
+﻿using Artify.WEB.Models.Artwork;
 using Artify.WEB.Services;
+using Artify.WEB.Services.Interfaces;
 using Artify.WEB.Shared;
 using Microsoft.AspNetCore.Components;
 

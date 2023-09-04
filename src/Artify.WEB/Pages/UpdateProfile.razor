@@ -1,0 +1,38 @@
+﻿@page "/profile/edit"
+<h3>UpdateProfile</h3>
+
+<EditForm Model="_profileUpdateDto" OnValidSubmit="Update" class="card card-body bg-gradient mt-5">
+    <div class="form-group row">
+        <label for="name" class="col-md-2 col-form-label">Public name:</label>
+        <div class="col-md-10">
+            <InputText id="name" class="form-control" @bind-Value="_profileUpdateDto.Name" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="profession" class="col-md-2 col-form-label">Profession:</label>
+        <div class="col-md-10">
+            <InputText id="profession" class="form-control" @bind-Value="_profileUpdateDto.Profession" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="city" class="col-md-2 col-form-label">City:</label>
+        <div class="col-md-10">
+            <InputText id="city" class="form-control" @bind-Value="_profileUpdateDto.City" />
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="country" class="col-md-2 col-form-label">Country:</label>
+        <div class="col-md-10">
+            <InputText id="country" class="form-control" @bind-Value="_profileUpdateDto.Country" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+    </div>
+</EditForm>

@@ -1,0 +1,15 @@
+﻿global using Artify.Repositories.Contracts;
+global using Artify.Entities.DTO.Artwork;
+global using Artify.Entities.Exceptions;
+global using Artify.Entities.Models;
+global using Artify.Services.Contracts;
+global using AutoMapper;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.IdentityModel.Tokens;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using System.Security.Cryptography;
+global using System.Text;
+global using Artify.Entities.DTO.Authorization;
+global using Artify.Entities.DTO;

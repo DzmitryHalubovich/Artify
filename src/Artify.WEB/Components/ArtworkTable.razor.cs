@@ -1,4 +1,4 @@
-﻿using Artify.WEB.Models;
+﻿using Artify.WEB.Models.Artwork;
 using Microsoft.AspNetCore.Components;
 
 namespace Artify.WEB.Components
@@ -6,6 +6,6 @@ namespace Artify.WEB.Components
     public partial class ArtworkTable
     {
         [Parameter]
-        public IEnumerable<ArtworkModel> Artworks { get; set; }
+        public IEnumerable<ArtworkDetailsModel> Artworks { get; set; }
     }
 }

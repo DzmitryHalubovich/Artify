@@ -1,6 +1,5 @@
-﻿using Artify.WEB.Models;
+﻿using Artify.WEB.Models.Artwork;
 using Artify.WEB.Services;
-using Microsoft.AspNetCore.Components;
 
 namespace Artify.WEB.Pages
 {
@@ -12,7 +11,7 @@ namespace Artify.WEB.Pages
         [Inject]
         public HttpInterceptorService Interceptor { get; set; }
 
-        public IEnumerable<ArtworkModel> ArtworksList { get; set; } = new List<ArtworkModel>();
+        public IEnumerable<ArtworkDetailsModel> ArtworksList { get; set; } = new List<ArtworkDetailsModel>();
 
         protected override async Task OnInitializedAsync()
         {

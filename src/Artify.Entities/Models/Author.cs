@@ -2,11 +2,9 @@
 
 namespace Artify.Entities.Models
 {
-    public class Author : IdentityUser
+    public class Author: IdentityUser<Guid>
     {
-        public string PublicName { get; set; }
-        public ICollection<Artwork>? Artworks { get; set; }
-
+        public required AuthorProfile Profile { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
     }

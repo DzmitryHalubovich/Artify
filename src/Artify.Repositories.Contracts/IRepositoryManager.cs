@@ -4,6 +4,7 @@
     {
         IArtworkRepository Artwork { get; }
         IAuthorRepository Author { get; }
+        IAuthorProfileRepository AuthorProfile { get; }
         Task SaveAsync();
     }
 }

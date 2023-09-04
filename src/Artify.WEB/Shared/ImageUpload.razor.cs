@@ -1,4 +1,4 @@
-﻿using Artify.WEB.Services;
+﻿using Artify.WEB.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http.Headers;

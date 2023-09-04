@@ -1,8 +1,4 @@
-﻿using Artify.WEB.Models;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
+﻿using Artify.WEB.Models.Artwork;
 
 namespace Artify.WEB.Services
 {
@@ -11,7 +7,6 @@ namespace Artify.WEB.Services
         private readonly HttpClient _client;
         private readonly JsonSerializerOptions _options;
         private readonly AuthenticationStateProvider _authProvider;
-        //New
 
         public ArtworkService(HttpClient client, AuthenticationStateProvider authProvider)
         {
@@ -39,13 +34,13 @@ namespace Artify.WEB.Services
             var deleteResult = await _client.DeleteAsync($"api/authors/{authorId}/artworks/{artworkId}");
         }
 
-        public async Task<ArtworkModel> GetArtwork(Guid artworkId)
+        public async Task<ArtworkDetailsModel> GetArtwork(Guid artworkId)
         {
-            var product = await _client.GetFromJsonAsync<ArtworkModel>($"/api/artworks/{artworkId}");
+            var product = await _client.GetFromJsonAsync<ArtworkDetailsModel>($"/api/artworks/{artworkId}");
             return product;
         }
 
-        public async Task<IEnumerable<ArtworkModel>> GetArtworks()
+        public async Task<IEnumerable<ArtworkDetailsModel>> GetArtworks()
         {
             var response = await _client.GetAsync("api/artworks");
             var content = await response.Content.ReadAsStringAsync();
@@ -55,11 +50,11 @@ namespace Artify.WEB.Services
                 throw new ApplicationException(content);
             }
 
-            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
+            var artworks = JsonSerializer.Deserialize<List<ArtworkDetailsModel>>(content, _options);
             return artworks;
         }
 
-        public async Task<IEnumerable<ArtworkModel>> GetArtworksForAuthor(Guid authorId)
+        public async Task<IEnumerable<ArtworkDetailsModel>> GetArtworksForAuthor(Guid authorId)
         {
             var response = await _client.GetAsync($"api/{authorId}/artworks");
             var content = await response.Content.ReadAsStringAsync();
@@ -69,7 +64,7 @@ namespace Artify.WEB.Services
                 throw new ApplicationException(content);
             }
 
-            var artworks = JsonSerializer.Deserialize<List<ArtworkModel>>(content, _options);
+            var artworks = JsonSerializer.Deserialize<List<ArtworkDetailsModel>>(content, _options);
             return artworks;
         }
         public async Task<AuthorModel> GetAuthor(Guid authorId)

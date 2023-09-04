@@ -3,6 +3,7 @@ using Artify.Entities.DTO;
 using Artify.Entities.DTO.Authorization;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Artify.Presentation.Controllers.Authorization
 {
@@ -11,11 +12,14 @@ namespace Artify.Presentation.Controllers.Authorization
 
     public class AuthenticationController : ControllerBase
     {
+        private readonly ILogger _logger;
         private readonly IServiceManager _service;
 
-        public AuthenticationController(IServiceManager service)
+
+        public AuthenticationController(IServiceManager service, ILoggerFactory logger)
         {
             _service = service;
+            _logger = logger.CreateLogger<AuthenticationController>();
         }
 
         [HttpPost("registration")]

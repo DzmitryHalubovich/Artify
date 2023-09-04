@@ -1,10 +1,9 @@
-﻿using Artify.Repository;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EmployeesApp.IntegrationTests
+namespace Artify.Repository.IntegrationTests
 {
     public class TestingWebAppFactory<TEntryPoint> : WebApplicationFactory<Program> where TEntryPoint : Program
     {
@@ -22,7 +21,6 @@ namespace EmployeesApp.IntegrationTests
                 {
                     options.UseInMemoryDatabase("InMemoryEmployeeTest");
                 });
-
 
                 var sp = services.BuildServiceProvider();
 

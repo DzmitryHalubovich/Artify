@@ -38,21 +38,22 @@ namespace Artify.Presentation.Controllers
             return Ok(artworks);
         }
 
+        [HttpPut("{authorId:guid}/profile")]
+        public async Task<IActionResult> UpdateAuthorProfile(Guid authorId,[FromBody] AuthorProfileUpdateDto authorProfile)
+        {
+            var doesAuthorExists = await _service.AuthorService.GetByIdAsync(authorId, false);
+
+            await _service.AuthorProfileService.Update(authorId, authorProfile);
+
+            return Ok(authorProfile);
+        }
+
         [HttpDelete("{authorId:guid}")]
         public async Task<IActionResult> DeleteAuthor(Guid authorId)
         {
             await _service.AuthorService.DeleteAsync(authorId, trackChanges:false);
 
             return NoContent();
-        }
-
-        [HttpPost]
-        [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> CreateAuthor(AuthorForCreationDto author)
-        {
-            var createdAuthor = await  _service.AuthorService.CreateAsync(author);
-
-            return CreatedAtRoute("AuthorById", new { authorId = createdAuthor.Id }, createdAuthor);
         }
     }
 }

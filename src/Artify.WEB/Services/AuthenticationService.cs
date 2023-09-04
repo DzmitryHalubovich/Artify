@@ -1,12 +1,4 @@
-﻿using Artify.WEB.AuthProviders;
-using Artify.WEB.Models;
-using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Text.Json;
-
-namespace Artify.WEB.Services
+﻿namespace Artify.WEB.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

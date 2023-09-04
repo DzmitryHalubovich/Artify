@@ -1,5 +1,4 @@
 ﻿using Artify.Entities.DTO.Artwork;
-using Artify.Entities.Models;
 using Artify.Presentation.Controllers;
 using Artify.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;

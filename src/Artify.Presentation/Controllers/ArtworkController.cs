@@ -12,8 +12,8 @@ namespace Artify.Presentation.Controllers
     [Route("api")]
     public class ArtworkController : ControllerBase
     {
-        private readonly IServiceManager _service;
         private readonly ILogger _logger;
+        private readonly IServiceManager _service;
 
         public ArtworkController(IServiceManager service, ILoggerFactory logger)
         {
@@ -22,13 +22,13 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpGet("artworks")]
-        [Authorize]
         public async Task<IActionResult> GetArtworks()
         {
             var artworks = await _service.ArtworkService.GetAllAsync(trackChanges: false);
 
             return Ok(artworks);
         }
+
 
         [HttpGet("{authorId}/artworks")]
         public async Task<IActionResult> GetArtworksForAuthor(Guid authorId)
@@ -58,7 +58,7 @@ namespace Artify.Presentation.Controllers
         }
 
         [HttpDelete("authors/{authorId:guid}/artworks/{artworkId:guid}")]
-        [ServiceFilter(typeof(AuthorExistsFilterAttribute))]
+        //[ServiceFilter(typeof(AuthorExistsFilterAttribute))]
         public async Task<IActionResult> DeleteArtwork(Guid authorId, Guid artworkId)
         {
             await _service.ArtworkService.DeleteAsync(authorId, artworkId, trackChanges: false);

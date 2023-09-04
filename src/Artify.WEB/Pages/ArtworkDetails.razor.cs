@@ -1,6 +1,4 @@
-﻿using Artify.WEB.Models;
-using Artify.WEB.Services;
-using Microsoft.AspNetCore.Components;
+﻿using Artify.WEB.Models.Artwork;
 
 namespace Artify.WEB.Pages
 {
@@ -9,7 +7,7 @@ namespace Artify.WEB.Pages
         [Parameter]
         public Guid ArtworkId { get; set; }
 
-        public ArtworkModel artwork = new ArtworkModel();
+        public ArtworkDetailsModel artwork = new ArtworkDetailsModel();
 
         [Inject]
         public IArtworkService ArtworkService { get; set; }

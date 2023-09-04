@@ -1,13 +1,15 @@
 ﻿using Artify.WEB.Models;
-using Artify.WEB.Services;
+using Artify.WEB.Services.Interfaces;
 using Artify.WEB.Shared;
 using Microsoft.AspNetCore.Components;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Artify.WEB.Pages
 {
     public partial class Registration
     {
         private UserForRegistrationDto _userForRegistration = new UserForRegistrationDto();
+        private UserForAuthenticationDto _userForAuthentication = new UserForAuthenticationDto();
 
         [Inject]
         public IAuthenticationService AuthenticationService { get; set; }
@@ -18,6 +20,10 @@ namespace Artify.WEB.Pages
         private SuccessNotification _notification;
         public bool ShowRegistrationErrors { get; set; }
         public IEnumerable<string> Errors { get; set; }
+
+        public bool ShowAuthError { get; set; }
+        public string Error { get; set; }
+
 
         public async Task Register()
         {
@@ -31,9 +37,25 @@ namespace Artify.WEB.Pages
             }
             else
             {
-                NavigationManager.NavigateTo("/");
+                _userForAuthentication.Email = _userForRegistration.Email;
+                _userForAuthentication.Password = _userForRegistration.Password;
                 _notification.Show();
+                await ExecuteLogin();
             }
+        }
+
+        public async Task ExecuteLogin()
+        {
+            ShowAuthError = false;
+            var result = await AuthenticationService.Login(_userForAuthentication);
+
+            if (!result.IsAuthSuccessful)
+            {
+                Error = result.ErrorMessage;
+                ShowAuthError = true;
+            }
+
+            NavigationManager.NavigateTo("/");
         }
     }
 }

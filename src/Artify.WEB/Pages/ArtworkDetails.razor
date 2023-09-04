@@ -1,21 +1,28 @@
 ﻿@page "/artworks/{artworkId:guid}"
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <img src="@artwork.ImageUrl" class="img-fluid" alt="@artwork.Title">
+ <div class="details-container">
+     <div class="image-container">
+         <img class="image-main" src="@artwork.ImageUrl" alt="@artwork.Title"/>
+     </div>
+     <div class="author-container">
+         <div class="author-info-container">
+             <div class="author-avatar-container">
+                <img class="author-avatar" src="https://localhost:7062/artworks-collection\Avatars\defaultAvatar.jpg" />
+             </div>
+             <div class="author-info">
+                <h4>
+                    @artwork.AuthorPublicName
+                </h4>
+                <p>@artwork.Profession</p>
+            </div>
+         </div>
+
+        <div class="artwork-description">
+            <h3>
+                @artwork.Title
+            </h3>
+            <p>@artwork.Description</p>
         </div>
-        <div class="col-4 description" style="color:#fff">
-            <h2>
-                Author: 
-                <a href ="/authors/@artwork.Author.Id">
-                    @artwork.Author.PublicName
-                </a>
-            </h2>
-            <h3>@artwork.Title</h3>
-            <p>
-                @artwork.Description
-            </p>
-        </div>
-    </div>
-</div>
+     </div>
+    
+ </div>

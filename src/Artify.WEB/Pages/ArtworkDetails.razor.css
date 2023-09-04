@@ -1,3 +1,60 @@
 ﻿.description {
     background-color: #202024;
 }
+
+.image-main {
+    display: block;
+    margin: auto;
+    max-height: 800px;
+}
+
+.image-container {
+    width: 100%;
+    background-color: black;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.author-container {
+    width: 400px;
+    background-color: #333332;
+    margin: 10px;
+}
+
+.author-info-container{
+    display:flex;
+}
+
+.author-avatar-container{
+    width: 25%;
+    margin: 5px;
+}
+
+.author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.author-info{
+    width: 80%;
+}
+
+.author-info h4 {
+    margin-top: 5px;
+    display: block;
+}
+
+.details-container {
+    width: 100%;
+    display: flex;
+}
+
+.artwork-description{
+    display:block;
+}
+
+.artwork-description{
+    margin:10px;
+}

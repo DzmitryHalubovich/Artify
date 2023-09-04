@@ -1,6 +1,7 @@
 using Artify.WEB;
 using Artify.WEB.AuthProviders;
 using Artify.WEB.Services;
+using Artify.WEB.Services.Interfaces;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -18,6 +19,7 @@ builder.Services.AddScoped(sp => new HttpClient
 
 builder.Services.AddScoped<IArtworkService, ArtworkService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IAuthorProfileService, AuthorProfileService>();
 builder.Services.AddScoped<RefreshTokenService>();
 builder.Services.AddHttpClientInterceptor();
 

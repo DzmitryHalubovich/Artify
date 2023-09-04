@@ -1,12 +1,4 @@
-﻿using Artify.Entities.DTO;
-using Artify.Entities.Exceptions;
-using Artify.Entities.Models;
-using Artify.Repositories.Contracts;
-using Artify.Services.Contracts;
-using AutoMapper;
-using Microsoft.Extensions.Configuration;
-
-namespace Artify.Services
+﻿namespace Artify.Services
 {
     public sealed class AuthorService : IAuthorService
     {
@@ -18,17 +10,6 @@ namespace Artify.Services
             _mapper = mapper;
         }
 
-        public  async Task<AuthorDto> CreateAsync(AuthorForCreationDto author)
-         {
-            var authorForDb = _mapper.Map<Author>(author);
-
-            _repository.Author.Create(authorForDb);
-           await _repository.SaveAsync();
-
-            var authorToReturn = _mapper.Map<AuthorDto>(authorForDb);
-
-            return authorToReturn;
-        }
 
         public async Task DeleteAsync(Guid authorId, bool trackChanges)
         {

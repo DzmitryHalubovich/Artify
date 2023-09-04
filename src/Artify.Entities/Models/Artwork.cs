@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Artify.Entities.Models
@@ -7,9 +8,9 @@ namespace Artify.Entities.Models
     {
         [Column("ArtworkId")]
         public Guid ArtworkId { get; set; }
-        public string AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
         [ForeignKey(nameof(AuthorId))]
-        public Author Author { get; set; }
+        public AuthorProfile AuthorProfile { get; set; }
 
         [Required(ErrorMessage = "Artwork title is a required field.")]
         [MaxLength(100, ErrorMessage = "Maximum length for the Title is 100 characters.")]
@@ -18,5 +19,14 @@ namespace Artify.Entities.Models
         [MaxLength(512, ErrorMessage = "Maximum length for the Descritption is 512 characters.")]
         public string? Description { get; set; }
         public string ImageUrl { get; set; } = default!;
+
+        public DateTime Created { get; set; }
+
+        [DefaultValue(0)]
+        public int Likes { get; set; }
+        [DefaultValue(0)]
+        public int Views { get; set; }
+
+        public ICollection<Comment>? Comments { get; set; } 
     }
 }

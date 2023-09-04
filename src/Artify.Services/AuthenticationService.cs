@@ -1,30 +1,17 @@
-﻿using Artify.Entities.DTO.Authorization;
-using Artify.Entities.Exceptions;
-using Artify.Entities.Models;
-using Artify.Services.Contracts;
-using AutoMapper;
-using Azure.Core;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-
-namespace Artify.Services
+﻿namespace Artify.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IMapper _mapper;
-        private readonly UserManager<Author> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private Author? _user;        private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        private Author? _user;
+        private readonly IRepositoryManager _repository;        private readonly UserManager<Author> _userManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
-        public AuthenticationService(IMapper mapper, UserManager<Author> userManager, 
-            IConfiguration configuration, RoleManager<IdentityRole> roleManager)
+
+        public AuthenticationService(IRepositoryManager repository, IMapper mapper, UserManager<Author> userManager,
+            IConfiguration configuration, RoleManager<IdentityRole<Guid>> roleManager)
         {
+            _repository=repository;
             _mapper=mapper;
             _userManager=userManager;
             _configuration=configuration;
@@ -60,7 +47,11 @@ namespace Artify.Services
             userForRegistration.Password);
 
             if (result.Succeeded)
+            {
                 await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
+                await _repository.AuthorProfile.CreateDefault(user);
+                await _repository.SaveAsync();
+            }
 
             _user = await _userManager.FindByNameAsync(userForRegistration.UserName);
 
@@ -68,7 +59,7 @@ namespace Artify.Services
 
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {
-            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            _user = await _userManager.FindByEmailAsync(userForAuth.Email);
             var result = (_user != null && await _userManager.CheckPasswordAsync(_user,
 userForAuth.Password));
 
@@ -82,10 +73,16 @@ userForAuth.Password));
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }        private async Task<List<Claim>> GetClaims()
         {
+            var userProfile = await _repository.AuthorProfile.GetByIdAsync(_user.Id, false);
+
             var claims = new List<Claim>
             {
-                new Claim("AuthorId", _user.Id),
-                new Claim("PublicName", _user.PublicName),
+                new Claim("AuthorId", _user.Id.ToString()),
+                new Claim("PublicName", userProfile.Name),
+                new Claim("Email", _user.Email),
+                new Claim("Profession", userProfile.Profession),
+                new Claim("City", userProfile.City),
+                new Claim("Country", userProfile.Country),
                 new Claim(ClaimTypes.Name, _user.UserName)
             };
             var roles = await _userManager.GetRolesAsync(_user);

@@ -6,7 +6,7 @@ namespace Artify.Services.Contracts
     {
         Task<IEnumerable<ArtworkDto>> GetAllAsync(bool trackChanges);
         Task<IEnumerable<ArtworkDto>> GetAllForAuthorAsync(Guid authorId, bool trackChanges);
-        Task<ArtworkDto> GetByIdAsync(Guid artworkId, bool trackChanges);
+        Task<ArtworkDetailsDto> GetByIdAsync(Guid artworkId, bool trackChanges);
         Task<ArtworkDto> CreateForAuthorAsync(Guid authorId, 
             ArtworkForCreationDto artwork, bool trackChanges);
 

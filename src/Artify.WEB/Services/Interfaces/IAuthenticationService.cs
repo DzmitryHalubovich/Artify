@@ -1,6 +1,6 @@
 ﻿using Artify.WEB.Models;
 
-namespace Artify.WEB.Services
+namespace Artify.WEB.Services.Interfaces
 {
     public interface IAuthenticationService
     {
